@@ -32,14 +32,18 @@ namespace School.Models
 
         public override string ToString()
         {
-            var result = $"FullName: {FullName}, Age: {Age}, Gender: {Gender}, Subjects:\n";
+            var res = $"FullName: {FullName}, Age: {Age}, Gender: {Gender}";
+
+            if (Class != null) res += $"Class: {Class?.Name}";
+            
+            res+=", Subjects:\n";
 
             foreach (var subject in Subjects)
             {
-                result += $"{subject}\t";
+                res += $"{subject.Name}\t";
             }
 
-            return result;
+            return res;
         }
     }
 }

@@ -16,5 +16,17 @@ namespace School.Models
         public Teacher Teacher { get; set; }
         
         public ICollection<Student> Students { get; set; } = new List<Student>();
+
+        public override string ToString()
+        {
+            var res = $"Name: {Name}, Teacher: {Teacher?.FullName}, Students:\n";
+            
+            foreach (var student in Students)
+            {
+                res += $"{student.FullName}\n";
+            }
+            
+            return res;
+        }
     }
 }

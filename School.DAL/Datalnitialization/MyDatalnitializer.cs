@@ -19,7 +19,7 @@ namespace School.DAL.Datalnitialization
             var t8 = new Teacher {FirstName = "Bertha", LastName = "Torres", Gender = Gender.Female, Age = 41};
             var t9 = new Teacher {FirstName = "Irene", LastName = "Bennett", Gender = Gender.Female, Age = 21};
             var t10 = new Teacher {FirstName = "Santiago", LastName = "Lucas", Gender = Gender.Male, Age = 51};
-            
+
             context.Teachers.AddRange(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
 
             context.SaveChanges();
@@ -36,8 +36,9 @@ namespace School.DAL.Datalnitialization
             var subj10 = new Subject {Name = "Drama", Teachers = new List<Teacher>{t8}};
             var subj11 = new Subject {Name = "Swimming", Teachers = new List<Teacher>{t9}};
             var subj12 = new Subject {Name = "Physical education", Teachers = new List<Teacher>{t9}};
-            
-            context.Subjects.AddRange(subj1,subj2,subj3,subj4,subj5,subj6,subj7,subj8,subj9,subj10,subj11,subj12);
+
+            context.Subjects.AddRange(subj1, subj2, subj3, subj4, subj5, subj6, subj7, subj8, subj9, subj10, subj11,
+                subj12);
 
             //context.SaveChanges();
 
@@ -47,8 +48,8 @@ namespace School.DAL.Datalnitialization
             var c4 = new Class {Name = "10C", Teacher = t3, TeacherId = t3.Id};
             var c5 = new Class {Name = "11B", Teacher = t2, TeacherId = t2.Id};
             var c6 = new Class {Name = "9A", Teacher = t9, TeacherId = t9.Id};
-            
-            context.Classes.AddRange(c1,c2,c3,c4,c5, c6);
+
+            context.Classes.AddRange(c1, c2, c3, c4, c5, c6);
 
             var subj_packet_1 = new List<Subject>() {subj1, subj2, subj4, subj9, subj5, subj12, subj11};
             var subj_packet_2 = new List<Subject>() {subj3, subj2, subj4, subj9, subj6, subj12, subj8};
@@ -119,8 +120,9 @@ namespace School.DAL.Datalnitialization
                 {FirstName = "Terry", LastName = "Campbell", Age = 14, Class = c6, ClassId = c6.Id, Gender = Gender.Male, Subjects = subj_packet_6};
             var s30 = new Student
                 {FirstName = "Rachel", LastName = "Patterson", Age = 15, Class = c6, ClassId = c6.Id, Gender = Gender.Female, Subjects = subj_packet_1};
-                
-            context.Students.AddRange(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28,s29,s30);
+
+            context.Students.AddRange(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18,
+                s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30);
 
             context.SaveChanges();
         }
