@@ -5,7 +5,7 @@ namespace School.DAL.EF.Repository
 {
     public interface IStudentRepository:IRepository<Student>
     {
-        List<Student> GetMaleStudents();
+        List<Student> GetOtherStudents();
 
         List<Student> GetStudentsOlderThen15Years();
     }

@@ -48,7 +48,7 @@ namespace School.DAL.Datalnitialization
             var c5 = new Class {Name = "11B", Teacher = t2, TeacherId = t2.Id};
             var c6 = new Class {Name = "9A", Teacher = t9, TeacherId = t9.Id};
             
-            context.Classes.AddRange(c1,c2,c3,c4,c5);
+            context.Classes.AddRange(c1,c2,c3,c4,c5, c6);
 
             var subj_packet_1 = new List<Subject>() {subj1, subj2, subj4, subj9, subj5, subj12, subj11};
             var subj_packet_2 = new List<Subject>() {subj3, subj2, subj4, subj9, subj6, subj12, subj8};
