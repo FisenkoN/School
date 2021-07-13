@@ -1,0 +1,12 @@
+E:\Tasks\School\School.Models\bin\Debug\net5.0\School.Models.deps.json
+E:\Tasks\School\School.Models\bin\Debug\net5.0\School.Models.dll
+E:\Tasks\School\School.Models\bin\Debug\net5.0\ref\School.Models.dll
+E:\Tasks\School\School.Models\bin\Debug\net5.0\School.Models.pdb
+E:\Tasks\School\School.Models\obj\Debug\net5.0\School.Models.csproj.AssemblyReference.cache
+E:\Tasks\School\School.Models\obj\Debug\net5.0\School.Models.GeneratedMSBuildEditorConfig.editorconfig
+E:\Tasks\School\School.Models\obj\Debug\net5.0\School.Models.AssemblyInfoInputs.cache
+E:\Tasks\School\School.Models\obj\Debug\net5.0\School.Models.AssemblyInfo.cs
+E:\Tasks\School\School.Models\obj\Debug\net5.0\School.Models.csproj.CoreCompileInputs.cache
+E:\Tasks\School\School.Models\obj\Debug\net5.0\School.Models.dll
+E:\Tasks\School\School.Models\obj\Debug\net5.0\ref\School.Models.dll
+E:\Tasks\School\School.Models\obj\Debug\net5.0\School.Models.pdb

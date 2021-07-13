@@ -1,0 +1,162 @@
+﻿using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using School.DAL.EF;
+using School.Models;
+
+namespace School.DAL.Datalnitialization
+{
+    public static class MyDatalnitializer
+    {
+        public static void InitializeData(SchoolContext context)
+        {
+            var t1 = new Teacher {FirstName = "Billie", LastName = "Palmer", Gender = Gender.Male, Age = 44};
+            var t2 = new Teacher {FirstName = "Rosa", LastName = "Powell", Gender = Gender.Female,Age = 23};
+            var t3 = new Teacher {FirstName = "Sheila", LastName = "White", Gender = Gender.Female, Age = 55};
+            var t4 = new Teacher {FirstName = "Jeremy", LastName = "Allison", Gender = Gender.Male, Age = 66};
+            var t5 = new Teacher {FirstName = "Ira", LastName = "Fitzgerald", Gender = Gender.Female, Age = 68};
+            var t6 = new Teacher {FirstName = "Melody", LastName = "Morrison", Gender = Gender.Female, Age = 20};
+            var t7 = new Teacher {FirstName = "Dianna", LastName = "Ballard", Gender = Gender.Female, Age = 50};
+            var t8 = new Teacher {FirstName = "Bertha", LastName = "Torres", Gender = Gender.Female, Age = 41};
+            var t9 = new Teacher {FirstName = "Irene", LastName = "Bennett", Gender = Gender.Female, Age = 21};
+            var t10 = new Teacher {FirstName = "Santiago", LastName = "Lucas", Gender = Gender.Male, Age = 51};
+            
+            context.Teachers.AddRange(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
+
+            context.SaveChanges();
+
+            var subj1 = new Subject {Name = "Math", Teachers = new List<Teacher>{t1,t5}};
+            var subj2 = new Subject {Name = "Art", Teachers = new List<Teacher>{t2}};
+            var subj3 = new Subject {Name = "English", Teachers = new List<Teacher>{t4,t6}};
+            var subj4 = new Subject {Name = "Music", Teachers = new List<Teacher>{t2}};
+            var subj5 = new Subject {Name = "Science", Teachers = new List<Teacher>{t1,t5}};
+            var subj6 = new Subject {Name = "History", Teachers = new List<Teacher>{t10}};
+            var subj7 = new Subject {Name = "Geography", Teachers = new List<Teacher>{t10}};
+            var subj8 = new Subject {Name = "IT", Teachers = new List<Teacher>{t3}};
+            var subj9 = new Subject {Name = "Biology", Teachers = new List<Teacher>{t7}};
+            var subj10 = new Subject {Name = "Drama", Teachers = new List<Teacher>{t8}};
+            var subj11 = new Subject {Name = "Swimming", Teachers = new List<Teacher>{t9}};
+            var subj12 = new Subject {Name = "Physical education", Teachers = new List<Teacher>{t9}};
+            
+            context.Subjects.AddRange(subj1,subj2,subj3,subj4,subj5,subj6,subj7,subj8,subj9,subj10,subj11,subj12);
+
+            //context.SaveChanges();
+
+            var c1 = new Class {Name = "10A", Teacher = t1, TeacherId = t1.Id};
+            var c2 = new Class {Name = "10B", Teacher = t6, TeacherId = t6.Id};
+            var c3 = new Class {Name = "11A", Teacher = t10, TeacherId = t10.Id};
+            var c4 = new Class {Name = "10C", Teacher = t3, TeacherId = t3.Id};
+            var c5 = new Class {Name = "11B", Teacher = t2, TeacherId = t2.Id};
+            var c6 = new Class {Name = "9A", Teacher = t9, TeacherId = t9.Id};
+            
+            context.Classes.AddRange(c1,c2,c3,c4,c5);
+
+            var subj_packet_1 = new List<Subject>() {subj1, subj2, subj4, subj9, subj5, subj12, subj11};
+            var subj_packet_2 = new List<Subject>() {subj3, subj2, subj4, subj9, subj6, subj12, subj8};
+            var subj_packet_3 = new List<Subject>() {subj1, subj2, subj6, subj3, subj7, subj10, subj11};
+            var subj_packet_4 = new List<Subject>() {subj1, subj6, subj7, subj8};
+            var subj_packet_5 = new List<Subject>() {subj10, subj12, subj4, subj7, subj5, subj2, subj11};
+            var subj_packet_6 = new List<Subject>() {subj10, subj12, subj4, subj7, subj5, subj2, subj11, subj1, subj3, subj6, subj8, subj9};
+            
+            //context.SaveChanges();
+
+            var s1 = new Student
+                {FirstName = "Rebecca", LastName = "King", Age = 16, Class = c1, ClassId = c1.Id, Gender = Gender.Female, Subjects = subj_packet_1};
+            var s2 = new Student
+                {FirstName = "Melissa", LastName = "Thompson", Age = 17, Class = c1, ClassId = c1.Id, Gender = Gender.Female, Subjects = subj_packet_2};
+            var s3 = new Student
+                {FirstName = "George", LastName = "Long", Age = 16, Class = c1, ClassId = c1.Id, Gender = Gender.Male, Subjects = subj_packet_1};
+            var s4 = new Student
+                {FirstName = "Karen", LastName = "Bell", Age = 16, Class = c2, ClassId = c2.Id, Gender = Gender.Male, Subjects = subj_packet_3};
+            var s5 = new Student
+                {FirstName = "Louise", LastName = "Bryant", Age = 17, Class = c2, ClassId = c2.Id, Gender = Gender.Male, Subjects = subj_packet_4};
+            var s6 = new Student
+                {FirstName = "Carolyn", LastName = "Mitchell", Age = 16, Class = c2, ClassId = c2.Id, Gender = Gender.Female, Subjects = subj_packet_1};
+            var s7 = new Student
+                {FirstName = "Matthew", LastName = "Hill", Age = 16, Class = c2, ClassId = c2.Id, Gender = Gender.Male, Subjects = subj_packet_5};
+            var s8 = new Student
+                {FirstName = "Jessica", LastName = "Patterson", Age = 16, Class = c3, ClassId = c3.Id, Gender = Gender.Female, Subjects = subj_packet_6};
+            var s9 = new Student
+                {FirstName = "Sandra", LastName = "Lopez", Age = 17, Class = c3, ClassId = c3.Id, Gender = Gender.Female, Subjects = subj_packet_2};
+            var s10 = new Student
+                {FirstName = "Beverly", LastName = "Howard", Age = 16, Class = c3, ClassId = c3.Id, Gender = Gender.Female, Subjects = subj_packet_6};
+            var s11 = new Student
+                {FirstName = "Carol", LastName = "Campbell", Age = 17, Class = c3, ClassId = c3.Id, Gender = Gender.Female, Subjects = subj_packet_4};
+            var s12 = new Student
+                {FirstName = "Richard", LastName = "Parker", Age = 16, Class = c3, ClassId = c3.Id, Gender = Gender.Male, Subjects = subj_packet_2};
+            var s13 = new Student
+                {FirstName = "Todd", LastName = "Alexander", Age = 17, Class = c4, ClassId = c4.Id, Gender = Gender.Male, Subjects = subj_packet_4};
+            var s14 = new Student
+                {FirstName = "Donna", LastName = "Butler", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Female, Subjects = subj_packet_4};
+            var s15 = new Student
+                {FirstName = "Howard", LastName = "Roberts", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male, Subjects = subj_packet_3};
+            var s16 = new Student
+                {FirstName = "Frank", LastName = "Wilson", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male, Subjects = subj_packet_6};
+            var s17 = new Student
+                {FirstName = "George", LastName = "Diaz", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male, Subjects = subj_packet_1};
+            var s18 = new Student
+                {FirstName = "Chris", LastName = "Griffin", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male, Subjects = subj_packet_1};
+            var s19 = new Student
+                {FirstName = "Amanda", LastName = "James", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Female, Subjects = subj_packet_6};
+            var s20 = new Student
+                {FirstName = "Sandra", LastName = "Miller", Age = 18, Class = c5, ClassId = c5.Id, Gender = Gender.Female, Subjects = subj_packet_3};
+            var s21 = new Student
+                {FirstName = "Carol", LastName = "Washington", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Female, Subjects = subj_packet_3};
+            var s22 = new Student
+                {FirstName = "Doris", LastName = "Johnson", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Female, Subjects = subj_packet_6};
+            var s23 = new Student
+                {FirstName = "Eugene", LastName = "Wright", Age = 16, Class = c5, ClassId = c5.Id, Gender = Gender.Male, Subjects = subj_packet_2};
+            var s24 = new Student
+                {FirstName = "Margaret", LastName = "Collins", Age = 16, Class = c5, ClassId = c5.Id, Gender = Gender.Female, Subjects = subj_packet_5};
+            var s25 = new Student
+                {FirstName = "Henry", LastName = "Hall", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Male, Subjects = subj_packet_5};
+            var s26 = new Student
+                {FirstName = "Frances ", LastName = "Thomas", Age = 14, Class = c6, ClassId = c6.Id, Gender = Gender.Female, Subjects = subj_packet_6};
+            var s27 = new Student
+                {FirstName = "Pamela", LastName = "Bennett", Age = 15, Class = c6, ClassId = c6.Id, Gender = Gender.Female, Subjects = subj_packet_2};
+            var s28 = new Student
+                {FirstName = "Kimberly", LastName = "Morgan", Age = 14, Class = c6, ClassId = c6.Id, Gender = Gender.Female, Subjects = subj_packet_3};
+            var s29 = new Student
+                {FirstName = "Terry", LastName = "Campbell", Age = 14, Class = c6, ClassId = c6.Id, Gender = Gender.Male, Subjects = subj_packet_6};
+            var s30 = new Student
+                {FirstName = "Rachel", LastName = "Patterson", Age = 15, Class = c6, ClassId = c6.Id, Gender = Gender.Female, Subjects = subj_packet_1};
+                
+            context.Students.AddRange(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28,s29,s30);
+
+            context.SaveChanges();
+        }
+
+        public static void RecreateDatabase(SchoolContext context)
+        {
+            context.Database.EnsureDeleted();
+            context.Database.Migrate();
+        }
+
+        public static void ClearData(SchoolContext context)
+        {
+            ExecuteDeleteSql(context, "Students");
+            ExecuteDeleteSql(context, "Classes");
+            ExecuteDeleteSql(context, "Subjects");
+            ExecuteDeleteSql(context, "StudentSubject");
+            ExecuteDeleteSql(context, "SubjectTeacher");
+            ExecuteDeleteSql(context, "Teacher");
+            ResetIdentity(context);
+        }
+
+        private static void ExecuteDeleteSql(SchoolContext context, string tableName)
+        {
+            var rawString = $"Delete from dbo.{tableName}";
+            context.Database.ExecuteSqlRaw(rawString);
+        }
+
+        private static void ResetIdentity(SchoolContext context)
+        {
+            var tables = new[] {"Students", "Classes", "Subjects", "StudentSubject", "SubjectTeacher", "Teacher"};
+
+            foreach (var itm in tables)
+            {
+                var rawSqlString = $"DBCC CHECKIDENT (\"dbo.{itm}\", RESEED, -1);";
+                context.Database.ExecuteSqlRaw(rawSqlString);
+            }
+        }
+    }
+}

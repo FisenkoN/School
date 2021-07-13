@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.DAL", "School.DAL\School.DAL.csproj", "{413CDFD9-B71B-4F15-B5EC-F855EC3BECC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Models", "School.Models\School.Models.csproj", "{6F3ABA8A-01D9-4098-9ECF-4CF16C9BE763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Production", "School.Production\School.Production.csproj", "{05620B77-4275-4C70-A1D5-C98195632A62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{413CDFD9-B71B-4F15-B5EC-F855EC3BECC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{413CDFD9-B71B-4F15-B5EC-F855EC3BECC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{413CDFD9-B71B-4F15-B5EC-F855EC3BECC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{413CDFD9-B71B-4F15-B5EC-F855EC3BECC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F3ABA8A-01D9-4098-9ECF-4CF16C9BE763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F3ABA8A-01D9-4098-9ECF-4CF16C9BE763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F3ABA8A-01D9-4098-9ECF-4CF16C9BE763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F3ABA8A-01D9-4098-9ECF-4CF16C9BE763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05620B77-4275-4C70-A1D5-C98195632A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05620B77-4275-4C70-A1D5-C98195632A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05620B77-4275-4C70-A1D5-C98195632A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05620B77-4275-4C70-A1D5-C98195632A62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
