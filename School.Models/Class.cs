@@ -9,10 +9,10 @@ namespace School.Models
         [Required]
         [StringLength(10,ErrorMessage = "Name cannot be longer than 10 characters.")]
         public string Name { get; set; }
-
-        [ForeignKey("Teacher")]
+        
         public int? TeacherId { get; set; }
 
+        [ForeignKey("TeacherId")]
         public Teacher Teacher { get; set; }
         
         public ICollection<Student> Students { get; set; } = new List<Student>();

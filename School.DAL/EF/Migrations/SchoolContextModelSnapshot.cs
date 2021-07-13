@@ -41,7 +41,9 @@ namespace School.DAL.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherId");
+                    b.HasIndex("TeacherId")
+                        .IsUnique()
+                        .HasFilter("[TeacherId] IS NOT NULL");
 
                     b.ToTable("Classes");
                 });
@@ -93,8 +95,8 @@ namespace School.DAL.EF.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<byte[]>("Timestamp")
                         .IsConcurrencyToken()
@@ -114,6 +116,9 @@ namespace School.DAL.EF.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -172,8 +177,8 @@ namespace School.DAL.EF.Migrations
             modelBuilder.Entity("School.Models.Class", b =>
                 {
                     b.HasOne("School.Models.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId");
+                        .WithOne("Class")
+                        .HasForeignKey("School.Models.Class", "TeacherId");
 
                     b.Navigation("Teacher");
                 });
@@ -220,6 +225,11 @@ namespace School.DAL.EF.Migrations
             modelBuilder.Entity("School.Models.Class", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("School.Models.Teacher", b =>
+                {
+                    b.Navigation("Class");
                 });
 #pragma warning restore 612, 618
         }

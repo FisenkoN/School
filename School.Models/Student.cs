@@ -21,15 +21,26 @@ namespace School.Models
         
         [Required] 
         public Gender Gender { get; set; }
-    
-        [ForeignKey("Class")] 
+        
         public int? ClassId { get; set; }
 
-        public virtual Class Class { get; set; }
+        [ForeignKey("ClassId")] 
+        public Class Class { get; set; }
 
-        public virtual List<Subject> Subjects { get; set; }
+        public ICollection<Subject> Subjects { get; set; } = new List<Subject>();
     
         [NotMapped] 
         public string FullName => FirstName + " " + LastName;
+
+        public override string ToString()
+        {
+            var res = $"FullName: {FullName}, Age: {Age}, Class: {Class?.Name}, Gender: {Gender}, Subjects:\n";
+            foreach (var subject in Subjects)
+            {
+                res += $"{subject.Name}\n";
+            }
+
+            return res;
+        }
     }
 }

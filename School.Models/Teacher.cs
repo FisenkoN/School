@@ -19,10 +19,10 @@ namespace School.Models
         
         [Required] 
         public Gender Gender { get; set; }
-
-        [ForeignKey("Class")]
+        
         public int? ClassId { get; set; }
         
+        [ForeignKey("ClassId")]
         public Class Class { get; set; }
 
         public ICollection<Subject> Subjects { get; set; } = new List<Subject>();
@@ -32,7 +32,7 @@ namespace School.Models
 
         public override string ToString()
         {
-            var result = $"FullName: {FirstName}, Age: {Age}, Gender: {Gender}, Subjects:\n";
+            var result = $"FullName: {FullName}, Age: {Age}, Gender: {Gender}, Subjects:\n";
 
             foreach (var subject in Subjects)
             {

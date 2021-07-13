@@ -94,14 +94,14 @@ namespace School.DAL.EF.Repository
             return SaveChanges();
         }
 
-        public T GetOne(int? id) => table.Find(id);
+        public virtual T GetOne(int? id) => table.Find(id);
 
-        public List<T> GetSome(Expression<Func<T, bool>> @where)
+        public virtual List<T> GetSome(Expression<Func<T, bool>> @where)
             => table.Where(where).ToList();
 
         public virtual List<T> GetAll() => table.ToList();
 
-        public List<T> GetAll<TSortField>(Expression<Func<T, TSortField>> orderBy, bool @ascending)
+        public virtual List<T> GetAll<TSortField>(Expression<Func<T, TSortField>> orderBy, bool @ascending)
             => (@ascending ? table.OrderBy(orderBy) : table.OrderByDescending(orderBy)).ToList();
 
         public List<T> ExecuteQuery(string sql) => table.FromSqlRaw(sql).ToList();

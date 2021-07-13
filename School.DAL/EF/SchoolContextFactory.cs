@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
@@ -10,9 +11,9 @@ namespace School.DAL.EF
         public SchoolContext CreateDbContext(string[] args)
         {
             var optionBuilder = new DbContextOptionsBuilder<SchoolContext>();
-            
+            Console.WriteLine("eeeeeeeeeeeeeeeee");
             var connectionString =
-                @"data source=DESKTOP-8TNDF2C\SQLEXPRESS; initial catalog=SchoolDB_v1.0.0;integrated security=True; MultipleActiveResultSets=True;App=EntityFramework";
+                @"data souratalog=SchoolDB_v1.0.0;integrated security=True; MultipleActiveResultSets=True;App=EntityFramework";
 
             optionBuilder.UseSqlServer(connectionString, options =>
                     options.EnableRetryOnFailure())

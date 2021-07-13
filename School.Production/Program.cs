@@ -19,12 +19,9 @@ namespace School.Production
                 
             }
 
-            using (var repo = new BaseRepository<Teacher>())
+            using (var repo = new StudentRepository())
             {
-                foreach (var teacher in repo.GetAll())
-                {
-                    Console.WriteLine(teacher);
-                }
+                Console.WriteLine(repo.GetOne(10));
             }
         }
     }
