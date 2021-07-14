@@ -8,7 +8,7 @@ using School.Models;
 
 namespace School.DAL.EF.Repository
 {
-    public class StudentRepository:BaseRepository<Student>, IStudentRepository
+    public class StudentRepository:BaseRepository<Student>, IStudentRepository, IRelated<Student,Class>
     {
         public List<Student> GetOtherStudents() =>
             GetRelatedData().
@@ -22,14 +22,10 @@ namespace School.DAL.EF.Repository
                 Select(s => s).
                 ToList();
         
-
-        public override List<Student> GetAll() => 
-            GetRelatedData().ToList();
-
         public override Student GetOne(int? id) =>
              GetRelatedData().First(s => s.Id == id);
         
-        private IIncludableQueryable<Student,Class> GetRelatedData() => 
+        public IIncludableQueryable<Student,Class> GetRelatedData() => 
             Context.Students.Include(s => s.Subjects)
                 .Include(s => s.Class);
 

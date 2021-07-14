@@ -16,7 +16,7 @@ namespace School.DAL.EF
 
         public DbSet<Class> Classes { get; set; }
         
-        internal SchoolContext(){}
+        public SchoolContext(){}
         
         public SchoolContext(DbContextOptions options) :base(options){}
 
@@ -24,7 +24,7 @@ namespace School.DAL.EF
         {
             if (optionsBuilder.IsConfigured) return;
 
-            const string connectionString = @"data source=DESKTOP-8TNDF2C\SQLEXPRESS; initial catalog=SchoolDB_v1.0.0;integrated security=True; MultipleActiveResultSets=True;App=EntityFramework";
+            const string connectionString = @"data source=DESKTOP-8TNDF2C\SQLEXPRESS; initial catalog=SchoolDB_v1.1.1;integrated security=True; MultipleActiveResultSets=True;App=EntityFramework";
             optionsBuilder.UseSqlServer(connectionString,
                     options => 
                         options.EnableRetryOnFailure())

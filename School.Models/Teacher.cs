@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using School.Models.Auth;
 
 namespace School.Models
 {
-    public class Teacher:EntityBase
+    public class Teacher:IdentityBase
     {
         [Required] 
         [StringLength(20, ErrorMessage = "FirstName cannot be longer than 20 characters.")]

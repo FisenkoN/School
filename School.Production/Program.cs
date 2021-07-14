@@ -20,46 +20,52 @@ namespace School.Production
                 
             }
 
-            using (var repo = new StudentRepository())
+            using (var repo = new TeacherRepository())
             {
-                var studentYura = new Student
+                foreach (var teacher in repo.GetRelatedData())
                 {
-                    Age = 14, ClassId = 5, FirstName = "Yura", LastName = "Fisenko", Gender = Gender.Male, Subjects =
-                        new List<Subject>
-                        {
-                            new Subject
-                            {
-                                Name = "Ukrainian", Teachers = new List<Teacher>
-                                {
-                                    new Teacher
-                                    {
-                                        FirstName = "Olya", LastName = "Polakova", Age = 34, Gender = Gender.Female
-                                    }
-
-                                }
-                            }
-                        }
-                };
+                    Console.WriteLine(teacher);
+                    Console.WriteLine("****************************************");
+                }
                 
-                repo.Add(studentYura);
-                
-                // foreach (var student in repo.GetAll(s=>s.FirstName, false))
+                // var studentYura = new Student
+                // {
+                //     Age = 14, ClassId = 5, FirstName = "Yura", LastName = "Fisenko", Gender = Gender.Male, Subjects =
+                //         new List<Subject>
+                //         {
+                //             new Subject
+                //             {
+                //                 Name = "Ukrainian", Teachers = new List<Teacher>
+                //                 {
+                //                     new Teacher
+                //                     {
+                //                         FirstName = "Olya", LastName = "Polakova", Age = 34, Gender = Gender.Female
+                //                     }
+                //
+                //                 }
+                //             }
+                //         }
+                // };
+                //
+                // repo.Add(studentYura);
+                //
+                // foreach (var student in repo.GetAll(s=>s.Age, true))
                 // {
                 //     Console.WriteLine(student.FullName);
                 // }
 
-                Console.WriteLine(repo.GetSome(s=>s.FirstName == "Yura" && s.LastName == "Fisenko").First());
-
-                repo.Delete(studentYura);
-
-                if (repo.GetSome(s => s.FirstName == "Yura" && s.LastName == "Fisenko").Count == 0)
-                {
-                    Console.WriteLine("NotFound");
-                }
-                else
-                {
-                    Console.WriteLine(repo.GetSome(s => s.FirstName == "Yura" && s.LastName == "Fisenko").First());
-                }
+                // Console.WriteLine(repo.GetSome(s=>s.FirstName == "Yura" && s.LastName == "Fisenko").First());
+                //
+                // repo.Delete(studentYura);
+                //
+                // if (repo.GetSome(s => s.FirstName == "Yura" && s.LastName == "Fisenko").Count == 0)
+                // {
+                //     Console.WriteLine("NotFound");
+                // }
+                // else
+                // {
+                //     Console.WriteLine(repo.GetSome(s => s.FirstName == "Yura" && s.LastName == "Fisenko").First());
+                // }
 
                 // studentYura.Age = 17;
                 //
