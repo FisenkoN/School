@@ -30,8 +30,8 @@ namespace School.DAL.EF.Repository
                 .Include(s => s.Class);
 
 
-        public override List<Student> GetSome(Expression<Func<Student, bool>> @where) =>
-            GetRelatedData().Where(where).ToList();
+        public IQueryable<Student> GetSome(Expression<Func<Student, bool>> @where) =>
+            GetRelatedData().Where(where);
 
         public override List<Student> GetAll<TSortField>(Expression<Func<Student, TSortField>> orderBy, bool ascending) =>
             (ascending ? GetRelatedData().OrderBy(orderBy) : GetRelatedData().OrderByDescending(orderBy)).ToList();

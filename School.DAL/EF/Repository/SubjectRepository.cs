@@ -29,9 +29,7 @@ namespace School.DAL.EF.Repository
                 .Include(s => s.Teachers);
 
 
-        public override List<Subject> GetSome(Expression<Func<Subject, bool>> @where) =>
-            GetRelatedData().
-                Where(where).
-                ToList();
+        public IQueryable<Subject> GetSome(Expression<Func<Subject, bool>> @where) =>
+            GetRelatedData().Where(where);
     }
 }

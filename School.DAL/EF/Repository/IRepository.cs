@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using School.Models;
 
@@ -21,7 +22,7 @@ namespace School.DAL.EF.Repository
         
         T GetOne(int? id);
         
-        List<T> GetSome(Expression<Func<T, bool>> where);
+        IQueryable<T> GetSome(Expression<Func<T, bool>> where);
 
         List<T> GetAll();
         

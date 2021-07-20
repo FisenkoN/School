@@ -21,7 +21,7 @@ namespace School.DAL.EF.Repository
         public override Teacher GetOne(int? id) =>
             GetRelatedData().First(t => t.Id == id);
 
-        public override List<Teacher> GetSome(Expression<Func<Teacher, bool>> @where) =>
-            GetRelatedData().Where(where).Select(t => t).ToList();
+        public IQueryable<Teacher> GetSome(Expression<Func<Teacher, bool>> @where) =>
+            GetRelatedData().Where(where).Select(t => t);
     }
 }

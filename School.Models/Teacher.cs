@@ -26,6 +26,9 @@ namespace School.Models
         [ForeignKey("ClassId")]
         public Class Class { get; set; }
 
+        [Required] 
+        public bool IsClassMate { get; set; } = false;
+
         public ICollection<Subject> Subjects { get; set; } = new List<Subject>();
         
         [NotMapped]

@@ -6,7 +6,7 @@ namespace School.Models
 {
     public class Class:EntityBase
     {
-        [Required]
+        [Required(ErrorMessage = "It's required value!")]
         [StringLength(10,ErrorMessage = "Name cannot be longer than 10 characters.")]
         public string Name { get; set; }
         

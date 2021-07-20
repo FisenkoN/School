@@ -144,6 +144,9 @@ namespace School.DAL.EF.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsClassMate")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsRegistered")
                         .HasColumnType("bit");
 

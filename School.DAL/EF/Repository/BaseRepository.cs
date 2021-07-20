@@ -27,7 +27,7 @@ namespace School.DAL.EF.Repository
         }
         
         
-        public int Add(T entity)
+        public virtual int Add(T entity)
         {
             table.Add(entity);
             return SaveChanges();
@@ -96,8 +96,8 @@ namespace School.DAL.EF.Repository
 
         public virtual T GetOne(int? id) => table.Find(id);
 
-        public virtual List<T> GetSome(Expression<Func<T, bool>> @where)
-            => table.Where(where).ToList();
+        public virtual IQueryable<T> GetSome(Expression<Func<T, bool>> @where)
+            => table.Where(where);
 
         public virtual List<T> GetAll() => table.ToList();
 
