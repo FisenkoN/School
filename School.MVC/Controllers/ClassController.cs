@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using School.DAL.EF.Repository;
 using School.Models;
 
@@ -10,21 +12,21 @@ namespace School.MVC.Controllers
     public class ClassController : Controller
     {
         private ClassRepository db;
-
+        
         private TeacherRepository TeacherRepository;
         
         private StudentRepository StudentRepository;
-
-
+        
+        
         public ClassController()
         {
             db = new ClassRepository();
             
             TeacherRepository = new TeacherRepository();
-
+        
             StudentRepository = new StudentRepository();
         }
-
+        
         // GET: Class
         public IActionResult Index()
         {
@@ -39,24 +41,22 @@ namespace School.MVC.Controllers
                 return NotFound();
             }
 
-            var @class = db.GetOne(id);
+            var @class = db.GetOneRelated(id);
             
             if (@class == null)
             {
                 return NotFound();
             }
-
+        
             return View(@class);
         }
-
+        
         // GET: Class/Create
         public IActionResult Create()
         {
-            ViewData["Teacher"] = new SelectList(TeacherRepository.GetSome(t => t.IsClassMate == false), "Id", "FullName");
-
-            var o = StudentRepository.GetSome(s => s.Class == null);
-            
-            ViewData["Students"] = new MultiSelectList(o, "Id", "FullName");
+            ViewData["Teachers"] = new SelectList(TeacherRepository.GetSome(t => t.Class == null), "Id", "FullName");
+        
+            ViewData["Students"] = new MultiSelectList(StudentRepository.GetSome(s => s.ClassId == null), "Id", "FullName");
             
             return View();
         }
@@ -66,25 +66,16 @@ namespace School.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Class @class)//На цьому етапі class
-                                                 //приходить з порожнім списком студентів
+        public IActionResult Create(Class @class)
         {
             db.Add(@class);
 
-            var r = new TeacherRepository();
-
-            var t = r.GetOne(@class.TeacherId);
-
-            t.IsClassMate = true;
-
-            r.Update(t);
-            
-            ViewData["Teacher"] = new SelectList(
-                TeacherRepository.GetSome(t => t.IsClassMate == false)
+            ViewData["Teachers"] = new SelectList(
+                TeacherRepository.GetSome(t => t.Class == null)
                 , "Id", "FullName");
             
             ViewData["Students"] = new MultiSelectList(
-                StudentRepository.GetSome(s => s.Class == null)
+                StudentRepository.GetSome(s => s.ClassId == null)
                 , "Id", "FullName");
             
             return RedirectToAction(nameof(Index));
@@ -98,18 +89,24 @@ namespace School.MVC.Controllers
                 return NotFound();
             }
 
-            var @class = db.GetOne(id);
+            var @class = db.GetOneRelated(id);
             
             if (@class == null)
             {
                 return NotFound();
             }
+            
+            var teachers = TeacherRepository.GetSome(t => t.Class == null).ToList();
 
-            var teachers = new List<Teacher>(TeacherRepository.GetSome(t => t.IsClassMate == false));
+            var students = StudentRepository.GetAll().Where(s => s.ClassId == null).ToList();
             
-            teachers.Add(@class.Teacher);
+            teachers.Add(@class?.Teacher);
             
-            ViewData["TeacherId"] = new SelectList(teachers.ToList(), "Id", "FirstName");
+            students.AddRange(@class.Students);
+            
+            ViewData["Teachers"] = new SelectList(teachers, "Id", "FullName");
+
+            ViewData["Students"] = new MultiSelectList(students, "Id", "FullName");
             
             return View(@class);
         }
@@ -119,15 +116,28 @@ namespace School.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Name,TeacherId,Id,Timestamp")] Class @class)
+        public IActionResult Edit(int id, [Bind("Name,TeacherId,Id,Timestamp,Students")] Class @class)
         {
-            if (id != @class.Id)
-            {
-                return NotFound();
-            }
+            if (id != @class.Id) return BadRequest();
+
+            if (!ModelState.IsValid) return View(@class);
             
-            db.Update(@class);
-                
+            try
+            {
+                db.Update(@class);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                ModelState.AddModelError(string.Empty,
+                    $@"Unable to save the record. Another user has updated it. {ex.Message}");
+                return View(@class);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty,
+                    $@"Unable to save the record. {ex.Message}");
+                return View(@class);
+            }
             return RedirectToAction(nameof(Index));
         }
 
@@ -139,7 +149,7 @@ namespace School.MVC.Controllers
                 return NotFound();
             }
 
-            var @class = db.GetOne(id);
+            var @class = db.GetOneRelated(id);
             
             if (@class == null)
             {
@@ -155,7 +165,7 @@ namespace School.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var @class = db.GetOne(id);
+            var @class = db.GetOneRelated(id);
 
             db.Delete(@class);
             

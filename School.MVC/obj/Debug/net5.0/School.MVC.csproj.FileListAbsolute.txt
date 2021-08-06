@@ -190,3 +190,4 @@ E:\Tasks\School\School.MVC\obj\Debug\net5.0\Razor\Views\Subject\Delete.cshtml.g.
 E:\Tasks\School\School.MVC\obj\Debug\net5.0\Razor\Views\Subject\Details.cshtml.g.cs
 E:\Tasks\School\School.MVC\obj\Debug\net5.0\Razor\Views\Subject\Edit.cshtml.g.cs
 E:\Tasks\School\School.MVC\obj\Debug\net5.0\Razor\Views\Subject\Index.cshtml.g.cs
+E:\Tasks\School\School.MVC\bin\Debug\net5.0\Web.config

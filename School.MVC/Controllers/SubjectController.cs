@@ -13,11 +13,15 @@ namespace School.MVC.Controllers
 
         private TeacherRepository TeacherRepository;
         
+        private StudentRepository StudentRepository;
+        
         public SubjectController()
         {
             db = new SubjectRepository();
 
             TeacherRepository = new TeacherRepository();
+
+            StudentRepository = new StudentRepository();
         }
         
         public IActionResult Index()
@@ -32,7 +36,7 @@ namespace School.MVC.Controllers
                 return NotFound();
             }
 
-            var subject = db.GetOne(id);
+            var subject = db.GetOneRelated(id);
             
             if (subject == null)
             {
@@ -44,28 +48,20 @@ namespace School.MVC.Controllers
         
         public IActionResult Create()
         {
-            ViewData["Teacher"] = new SelectList(TeacherRepository.GetAll(), "Id", "FullName");
-            
+            ViewData["Teachers"] = new SelectList(TeacherRepository.GetAll(), "Id", "FullName");
+            ViewData["Students"] = new SelectList(StudentRepository.GetAll(), "Id", "FullName");
             return View();
         }
 
-        // POST: Class/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Subject subject)
+        public IActionResult Create(Subject data)
         {
-            db.Add(subject);
-            
-            ViewData["Teacher"] = new SelectList(
-                TeacherRepository.GetAll()
-                , "Id", "FullName");
+            db.Add(data);
             
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Class/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,23 +69,19 @@ namespace School.MVC.Controllers
                 return NotFound();
             }
 
-            var subject = db.GetOne(id);
+            var subject = db.GetOneRelated(id);
             
             if (subject == null)
             {
                 return NotFound();
             }
 
-            var teachers = new List<Teacher>(TeacherRepository.GetAll());
-            
-            ViewData["Teacher"] = new MultiSelectList(teachers.ToList(), "Id", "FirstName");
+            ViewData["Teachers"] = new SelectList(TeacherRepository.GetAll(), "Id", "FullName");
+            ViewData["Students"] = new SelectList(StudentRepository.GetAll(), "Id", "FullName");
             
             return View(subject);
         }
 
-        // POST: Class/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Name,TeacherId,Id,Timestamp")] Subject subject)
@@ -104,7 +96,6 @@ namespace School.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Class/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,7 +103,7 @@ namespace School.MVC.Controllers
                 return NotFound();
             }
 
-            var subject = db.GetOne(id);
+            var subject = db.GetOneRelated(id);
             
             if (subject == null)
             {
@@ -122,13 +113,12 @@ namespace School.MVC.Controllers
             return View(subject);
         }
 
-        // POST: Class/Delete/5
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var subject = db.GetOne(id);
+            var subject = db.GetOneRelated(id);
 
             db.Delete(subject);
             

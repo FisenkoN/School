@@ -25,7 +25,7 @@ namespace School.MVC.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            return BadRequest();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

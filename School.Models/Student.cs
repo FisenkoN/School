@@ -18,7 +18,7 @@ namespace School.Models
         [StringLength(20, ErrorMessage = "LastName cannot be longer than 20 characters.")]
         public string LastName { get; set; }
 
-        [Range(5,18, ErrorMessage = "Age mast be more then 5 and less then 18")]
+        [Range(5,18, ErrorMessage = "Age must be more then 5 and less then 18")]
         public int Age { get; set; }
         
         [Required] 

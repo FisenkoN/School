@@ -5,5 +5,7 @@ namespace School.DAL.EF.Repository
     public interface IRelated<T,Y>
     {
         public IIncludableQueryable<T, Y> GetRelatedData();
+
+        public T GetOneRelated(int? id);
     }
 }

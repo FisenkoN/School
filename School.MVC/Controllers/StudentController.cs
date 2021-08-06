@@ -42,7 +42,7 @@ namespace School.MVC.Controllers
                 return NotFound();
             }
 
-            var student = db.GetOne(id);
+            var student = db.GetOneRelated(id);
             
             if (student == null)
             {
@@ -55,7 +55,9 @@ namespace School.MVC.Controllers
         // GET: Student/Create
         public IActionResult Create()
         {
-            ViewData["ClassId"] = new SelectList(ClassRepository.GetAll(), "Id", "Name");
+            ViewData["Classes"] = new SelectList(ClassRepository.GetAll(), "Id", "Name");
+            
+            ViewData["Subjects"] = new MultiSelectList(SubjectRepository.GetAll(), "Id", "Name");
             return View();
         }
 
@@ -64,13 +66,15 @@ namespace School.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FirstName,LastName,Age,Gender,ClassId,Password,Email,Role,IsRegistered,Id,Timestamp")] Student student)
+        public IActionResult Create([Bind("FirstName,LastName,Age,Gender,ClassId,Password,Email,Role,IsRegistered,Id,Timestamp, Subjects")] Student student)
         {
             db.Add(student);
             
-            ViewData["ClassId"] = new SelectList(ClassRepository.GetAll(), "Id", "Name", student.ClassId);
+            ViewData["Classes"] = new SelectList(ClassRepository.GetAll(), "Id", "Name");
             
-            return View(student);
+            ViewData["Subjects"] = new MultiSelectList(SubjectRepository.GetAll(), "Id", "Name");
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Student/Edit/5
@@ -81,13 +85,15 @@ namespace School.MVC.Controllers
                 return NotFound();
             }
 
-            var student = db.GetOne(id);
+            var student = db.GetOneRelated(id);
             
             if (student == null)
             {
                 return NotFound();
             }
-            ViewData["ClassId"] = new SelectList(ClassRepository.GetAll(), "Id", "Name", student.ClassId);
+            ViewData["Classes"] = new SelectList(ClassRepository.GetAll(), "Id", "Name");
+            
+            ViewData["Subjects"] = new MultiSelectList(SubjectRepository.GetAll(), "Id", "Name");
             
             return View(student);
         }
@@ -97,7 +103,7 @@ namespace School.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("FirstName,LastName,Age,Gender,ClassId,Password,Email,Role,IsRegistered,Id,Timestamp")] Student student)
+        public IActionResult Edit(int id, [Bind("FirstName,LastName,Age,Gender,ClassId,Password,Email,Role,IsRegistered,Id,Timestamp ,Subjects")] Student student)
         {
             if (id != student.Id)
             {
@@ -117,7 +123,7 @@ namespace School.MVC.Controllers
                 return NotFound();
             }
 
-            var student = db.GetOne(id);
+            var student = db.GetOneRelated(id);
             
             if (student == null)
             {
@@ -132,7 +138,7 @@ namespace School.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var student = db.GetOne(id);
+            var student = db.GetOneRelated(id);
 
             db.Delete(student);
             

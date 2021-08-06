@@ -23,14 +23,17 @@ namespace School.DAL.EF.Repository
                 ToList();
         
         public override Student GetOne(int? id) =>
-             GetRelatedData().First(s => s.Id == id);
+             GetAll().First(s => s.Id == id);
         
         public IIncludableQueryable<Student,Class> GetRelatedData() => 
             Context.Students.Include(s => s.Subjects)
                 .Include(s => s.Class);
 
+        public Student GetOneRelated(int? id) =>
+            GetRelatedData().First(s => s.Id == id);
 
-        public IQueryable<Student> GetSome(Expression<Func<Student, bool>> @where) =>
+
+        public override IQueryable<Student> GetSome(Expression<Func<Student, bool>> @where) =>
             GetRelatedData().Where(where);
 
         public override List<Student> GetAll<TSortField>(Expression<Func<Student, TSortField>> orderBy, bool ascending) =>

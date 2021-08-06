@@ -21,15 +21,19 @@ namespace School.DAL.EF.Repository
                  ToList();
 
         public override Subject GetOne(int? id) =>
-            GetRelatedData().
+            GetAll().
                 First(s => s.Id == id);
 
         public IIncludableQueryable<Subject, ICollection<Teacher>> GetRelatedData() => 
             Context.Subjects.Include(s => s.Students)
                 .Include(s => s.Teachers);
 
+        public Subject GetOneRelated(int? id) =>
+            GetRelatedData().
+                First(s => s.Id == id);
 
-        public IQueryable<Subject> GetSome(Expression<Func<Subject, bool>> @where) =>
+
+        public override IQueryable<Subject> GetSome(Expression<Func<Subject, bool>> @where) =>
             GetRelatedData().Where(where);
     }
 }

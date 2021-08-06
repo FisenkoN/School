@@ -18,10 +18,13 @@ namespace School.DAL.EF.Repository
             Context.Teachers.Include(t => t.Subjects)
                 .Include(t => t.Class);
 
-        public override Teacher GetOne(int? id) =>
+        public Teacher GetOneRelated(int? id) =>
             GetRelatedData().First(t => t.Id == id);
 
-        public IQueryable<Teacher> GetSome(Expression<Func<Teacher, bool>> @where) =>
+        public override Teacher GetOne(int? id) =>
+            GetAll().First(t => t.Id == id);
+
+        public override IQueryable<Teacher> GetSome(Expression<Func<Teacher, bool>> @where) =>
             GetRelatedData().Where(where).Select(t => t);
     }
 }

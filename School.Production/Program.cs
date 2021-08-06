@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using School.DAL.Datalnitialization;
 using School.DAL.EF;
 using School.DAL.EF.Repository;
+using School.Models;
 
 namespace School.Production
 {
@@ -12,12 +13,16 @@ namespace School.Production
         static void Main(string[] args)
         {
             Init();
+            
+            var db = new SubjectRepository();
 
-            var db = new StudentRepository();
+            var subjects = db.GetRelatedData();
 
-            Console.WriteLine();
-
-
+            foreach (var s in subjects)
+            {
+                Console.WriteLine(s);
+                Console.WriteLine();
+            }
         }
 
         private static void Init()
@@ -27,11 +32,6 @@ namespace School.Production
             MyDatalnitializer.RecreateDatabase(init);
             
             MyDatalnitializer.InitializeData(init);
-        }
-
-        static void ShowMainMenu()
-        {
-          
         }
     }
 }

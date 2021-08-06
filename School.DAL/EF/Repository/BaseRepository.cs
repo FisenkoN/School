@@ -67,13 +67,13 @@ namespace School.DAL.EF.Repository
             return SaveChanges();
         }
 
-        public int Update(T entity)
+        public virtual int Update(T entity)
         {
             table.Update(entity);
             return SaveChanges();
         }
 
-        public int Update(IList<T> entities)
+        public  int Update(IList<T> entities)
         {
             table.UpdateRange(entities);
             return SaveChanges();
@@ -88,7 +88,7 @@ namespace School.DAL.EF.Repository
             return SaveChanges();
         }
 
-        public int Delete(T entity)
+        public virtual int Delete(T entity)
         {
             db.Entry(entity).State = EntityState.Deleted;
             return SaveChanges();

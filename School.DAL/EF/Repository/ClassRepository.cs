@@ -14,8 +14,12 @@ namespace School.DAL.EF.Repository
             Context.Classes.Include(c => c.Students)
                 .Include(c => c.Teacher);
 
-        public override Class GetOne(int? id) =>
+        public Class GetOneRelated(int? id) =>
             GetRelatedData()
+                .First(c => c.Id == id);
+
+        public override Class GetOne(int? id) =>
+            GetAll()
                 .First(c => c.Id == id);
 
         public override IQueryable<Class> GetSome(Expression<Func<Class, bool>> @where) =>
@@ -26,9 +30,17 @@ namespace School.DAL.EF.Repository
 
         public override int Add(Class entity)
         {
-            var t = new TeacherRepository().GetOne(entity.TeacherId).IsClassMate = true;
-            SaveChanges();
             return base.Add(entity);
+        }
+
+        public override int Update(Class entity)
+        {
+            return base.Update(entity);
+        }
+
+        public override int Delete(Class entity)
+        {
+            return base.Delete(entity);
         }
     }
 }

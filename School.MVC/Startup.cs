@@ -15,6 +15,7 @@ namespace School.MVC
     {
         public Startup(IConfiguration configuration)
         {
+
             Configuration = configuration;
         }
 

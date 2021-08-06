@@ -14,10 +14,18 @@ namespace School.MVC.Controllers
     public class TeacherController : Controller
     {
         private TeacherRepository db;
+        
+        private readonly ClassRepository ClassRepository;
+        
+        private readonly SubjectRepository SubjectRepository;
 
         public TeacherController()
         {
             db = new TeacherRepository();
+
+            ClassRepository = new ClassRepository();
+
+            SubjectRepository = new SubjectRepository();
         }
 
         // GET: Teacher
@@ -34,7 +42,7 @@ namespace School.MVC.Controllers
                 return BadRequest();
             }
 
-            var teacher = db.GetOne(id);
+            var teacher = db.GetOneRelated(id);
             
             if (teacher == null)
             {
@@ -47,6 +55,10 @@ namespace School.MVC.Controllers
         // GET: Teacher/Create
         public IActionResult Create()
         {
+            ViewData["Classes"] = new SelectList(ClassRepository.GetSome(c=>c.Teacher==null), "Id", "Name");
+            
+            ViewData["Subjects"] = new MultiSelectList(SubjectRepository.GetAll(), "Id", "Name");
+            
             return View();
         }
 
@@ -55,9 +67,13 @@ namespace School.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FirstName,LastName,Age,Gender,ClassId,Password,Email,Role,IsRegistered,Id,Timestamp")] Teacher teacher)
+        public IActionResult Create([Bind("FirstName,LastName,Age,Gender,ClassId,Password,Email,Role,IsRegistered,Id,Timestamp,Subjects")] Teacher teacher)
         {
             db.Add(teacher);
+            
+            ViewData["Classes"] = new SelectList(ClassRepository.GetSome(c=>c.Teacher==null), "Id", "Name");
+            
+            ViewData["Subjects"] = new MultiSelectList(SubjectRepository.GetAll(), "Id", "Name");
             
             return RedirectToAction(nameof(Index));
         }
@@ -70,21 +86,37 @@ namespace School.MVC.Controllers
                 return BadRequest();
             }
 
-            var teacher = db.GetOne(id);
+            var teacher = db.GetOneRelated(id);
             
             if (teacher == null)
             {
                 return NotFound();
             }
+
+            var classesIQuery = ClassRepository.GetSome(c => c.Teacher == null);
+
+            var classes = classesIQuery.ToList();
+
+
+            if (teacher?.Class != null)
+            {
+                classes.Add(teacher?.Class);
+            }
+            
+
+            var subjects = SubjectRepository.GetAll();
+            
+            ViewData["Classes"] = new SelectList(classes, "Id", "Name");
+            
+            ViewData["Subjects"] = new MultiSelectList(subjects, "Id", "Name");
+            
             return View(teacher);
         }
 
-        // POST: Teacher/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("FirstName,LastName,Age,Gender,ClassId,Password,Email,Role,IsRegistered,Id,Timestamp")] Teacher teacher)
+        public IActionResult Edit(int id, [Bind("FirstName,LastName,Age,Gender,ClassId,Password,Email,Role,IsRegistered,Id,Timestamp, Subjects")] Teacher teacher)
         {
             if (id != teacher.Id)
             {
@@ -104,7 +136,7 @@ namespace School.MVC.Controllers
                 return BadRequest();
             }
 
-            var teacher = db.GetOne(id);
+            var teacher = db.GetOneRelated(id);
             
             if (teacher == null)
             {
@@ -119,7 +151,7 @@ namespace School.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var teacher = db.GetOne(id);
+            var teacher = db.GetOneRelated(id);
 
             db.Delete(teacher);
             
