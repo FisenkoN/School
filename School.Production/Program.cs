@@ -13,25 +13,8 @@ namespace School.Production
         static void Main(string[] args)
         {
             Init();
-            
-            var db = new SubjectRepository();
-
-            var subjects = db.GetRelatedData();
-
-            foreach (var s in subjects)
-            {
-                Console.WriteLine(s);
-                Console.WriteLine();
-            }
         }
 
-        private static void Init()
-        {
-            var init = new SchoolContext();
-            
-            MyDatalnitializer.RecreateDatabase(init);
-            
-            MyDatalnitializer.InitializeData(init);
-        }
+        
     }
 }
