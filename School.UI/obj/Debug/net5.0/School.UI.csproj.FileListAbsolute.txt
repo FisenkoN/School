@@ -72,3 +72,5 @@ E:\Tasks\School\School.UI\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Js
 E:\Tasks\School\School.UI\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Abstractions.dll
 E:\Tasks\School\School.UI\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Physical.dll
 E:\Tasks\School\School.UI\bin\Debug\net5.0\Microsoft.Extensions.FileSystemGlobbing.dll
+E:\Tasks\School\School.UI\bin\Debug\net5.0\School.BLL.dll
+E:\Tasks\School\School.UI\bin\Debug\net5.0\School.BLL.pdb

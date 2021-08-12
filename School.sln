@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.DAL", "School.DAL\School.DAL.csproj", "{413CDFD9-B71B-4F15-B5EC-F855EC3BECC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.BAL", "School.BAL\School.BAL.csproj", "{D290FF9F-8330-416B-8309-C56BD0AB4532}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.BLL", "School.BLL\School.BLL.csproj", "{D290FF9F-8330-416B-8309-C56BD0AB4532}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.UI", "School.UI\School.UI.csproj", "{E8F6DF38-F8EC-455A-B323-E7454527D814}"
 EndProject

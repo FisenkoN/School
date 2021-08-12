@@ -21,17 +21,5 @@ namespace School.DAL.Entities
         {
             Students = new List<Student>();
         }
-        
-        public override string ToString()
-        {
-            var res = $"Name: {Name}, Teacher: {Teacher?.FullName}, Students:\n";
-            
-            foreach (var student in Students)
-            {
-                res += $"{student.FullName}\n";
-            }
-            
-            return res;
-        }
     }
 }

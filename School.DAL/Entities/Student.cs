@@ -26,24 +26,10 @@ namespace School.DAL.Entities
         public Class Class { get; set; }
 
         public ICollection<Subject> Subjects { get; set; }
-    
-        [NotMapped] 
-        public string FullName => FirstName + " " + LastName;
 
         public Student()
         {
             Subjects = new List<Subject>();
-        }
-        
-        public override string ToString()
-        {
-            var res = $"FullName: {FullName}, Age: {Age}, Class: {Class?.Name}, Gender: {Gender}, Subjects:\n";
-            foreach (var subject in Subjects)
-            {
-                res += $"{subject.Name}\n";
-            }
-
-            return res;
         }
     }
 }

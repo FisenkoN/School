@@ -24,14 +24,14 @@ namespace School.DAL.Repository
                 ToList();
         
         public override Student GetOne(int? id) =>
-             GetAll().First(s => s.Id == id);
+             GetAll().FirstOrDefault(s => s.Id == id);
         
         public IIncludableQueryable<Student,Class> GetRelatedData() => 
             DbContext.Students.Include(s => s.Subjects)
                 .Include(s => s.Class);
 
         public Student GetOneRelated(int? id) =>
-            GetRelatedData().First(s => s.Id == id);
+            GetRelatedData().FirstOrDefault(s => s.Id == id);
 
 
         public override IQueryable<Student> GetSome(Expression<Func<Student, bool>> @where) =>

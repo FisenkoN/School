@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using School.DAL.EF;
 using School.DAL.Entities;
 
-namespace School.DAL.Datalnitialization
+namespace School.DAL.DataInitialization
 {
-    public static class MyDatalnitializer
+    public static class MyDataInitializer
     {
         public static void InitializeData(SchoolDbContext dbContext)
         {

@@ -4,8 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using School.DAL.EF;
-using School.DAL.EF.Repository;
 using School.DAL.Entities;
 
 namespace School.DAL.Repository
@@ -83,9 +81,7 @@ namespace School.DAL.Repository
 
         public int Delete(int id, byte[] timestamp)
         {
-            db.Entry(
-                new T() {Id = id, Timestamp = timestamp}).State = 
-                EntityState.Deleted;
+            Delete(table.First(t=>t.Id==id && t.Timestamp == timestamp));
 
             return SaveChanges();
         }

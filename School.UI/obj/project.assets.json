@@ -1759,6 +1759,19 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "School.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "School.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/School.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/School.BLL.dll": {}
+        }
+      },
       "School.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -6592,6 +6605,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "School.BLL/1.0.0": {
+      "type": "project",
+      "path": "../School.BLL/School.BLL.csproj",
+      "msbuildProject": "../School.BLL/School.BLL.csproj"
+    },
     "School.DAL/1.0.0": {
       "type": "project",
       "path": "../School.DAL/School.DAL.csproj",
@@ -6606,6 +6624,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "Microsoft.EntityFrameworkCore >= 5.0.7",
+      "School.BLL >= 1.0.0",
       "School.DAL >= 1.0.0"
     ]
   },
@@ -6644,6 +6663,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "E:\\Tasks\\School\\School.BLL\\School.BLL.csproj": {
+              "projectPath": "E:\\Tasks\\School\\School.BLL\\School.BLL.csproj"
+            },
             "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj": {
               "projectPath": "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj"
             }

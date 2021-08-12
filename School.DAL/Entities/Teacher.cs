@@ -24,32 +24,12 @@ namespace School.DAL.Entities
         
         [ForeignKey("ClassId")]
         public Class Class { get; set; }
-        
+
         public ICollection<Subject> Subjects { get; set; }
-        
-        [NotMapped]
-        public string FullName => FirstName + " " + LastName;
 
         public Teacher()
         {
             Subjects = new List<Subject>();
-            
-        }
-        
-        public override string ToString()
-        {
-            var res = $"FullName: {FullName}, Age: {Age}, Gender: {Gender}";
-
-            if (Class != null) res += $"Class: {Class?.Name}";
-            
-            res+=", Subjects:\n";
-
-            foreach (var subject in Subjects)
-            {
-                res += $"{subject.Name}\t";
-            }
-
-            return res;
         }
     }
 }

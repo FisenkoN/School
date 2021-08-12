@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.DAL.EF;
 
-namespace School.DAL.EF.Migrations
+namespace School.DAL.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
     [Migration("20210809124722_Console_1.0")]

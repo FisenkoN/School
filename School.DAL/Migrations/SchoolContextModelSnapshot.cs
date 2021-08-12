@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using School.DAL.EF;
+using School.DAL;
 
-namespace School.DAL.EF.Migrations
+namespace School.DAL.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
     partial class SchoolContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace School.DAL.EF.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("School.Models.Class", b =>
+            modelBuilder.Entity("School.DAL.Entities.Class", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,12 +41,10 @@ namespace School.DAL.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherId");
-
                     b.ToTable("Classes");
                 });
 
-            modelBuilder.Entity("School.Models.Student", b =>
+            modelBuilder.Entity("School.DAL.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +82,7 @@ namespace School.DAL.EF.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("School.Models.Subject", b =>
+            modelBuilder.Entity("School.DAL.Entities.Subject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,7 +104,7 @@ namespace School.DAL.EF.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("School.Models.Teacher", b =>
+            modelBuilder.Entity("School.DAL.Entities.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -139,7 +137,9 @@ namespace School.DAL.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassId");
+                    b.HasIndex("ClassId")
+                        .IsUnique()
+                        .HasFilter("[ClassId] IS NOT NULL");
 
                     b.ToTable("Teachers");
                 });
@@ -174,42 +174,33 @@ namespace School.DAL.EF.Migrations
                     b.ToTable("SubjectTeacher");
                 });
 
-            modelBuilder.Entity("School.Models.Class", b =>
+            modelBuilder.Entity("School.DAL.Entities.Student", b =>
                 {
-                    b.HasOne("School.Models.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId");
-
-                    b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("School.Models.Student", b =>
-                {
-                    b.HasOne("School.Models.Class", "Class")
+                    b.HasOne("School.DAL.Entities.Class", "Class")
                         .WithMany("Students")
                         .HasForeignKey("ClassId");
 
                     b.Navigation("Class");
                 });
 
-            modelBuilder.Entity("School.Models.Teacher", b =>
+            modelBuilder.Entity("School.DAL.Entities.Teacher", b =>
                 {
-                    b.HasOne("School.Models.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
+                    b.HasOne("School.DAL.Entities.Class", "Class")
+                        .WithOne("Teacher")
+                        .HasForeignKey("School.DAL.Entities.Teacher", "ClassId");
 
                     b.Navigation("Class");
                 });
 
             modelBuilder.Entity("StudentSubject", b =>
                 {
-                    b.HasOne("School.Models.Student", null)
+                    b.HasOne("School.DAL.Entities.Student", null)
                         .WithMany()
                         .HasForeignKey("StudentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("School.Models.Subject", null)
+                    b.HasOne("School.DAL.Entities.Subject", null)
                         .WithMany()
                         .HasForeignKey("SubjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -218,22 +209,24 @@ namespace School.DAL.EF.Migrations
 
             modelBuilder.Entity("SubjectTeacher", b =>
                 {
-                    b.HasOne("School.Models.Subject", null)
+                    b.HasOne("School.DAL.Entities.Subject", null)
                         .WithMany()
                         .HasForeignKey("SubjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("School.Models.Teacher", null)
+                    b.HasOne("School.DAL.Entities.Teacher", null)
                         .WithMany()
                         .HasForeignKey("TeachersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("School.Models.Class", b =>
+            modelBuilder.Entity("School.DAL.Entities.Class", b =>
                 {
                     b.Navigation("Students");
+
+                    b.Navigation("Teacher");
                 });
 #pragma warning restore 612, 618
         }
