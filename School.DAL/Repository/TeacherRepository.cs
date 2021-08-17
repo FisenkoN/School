@@ -20,7 +20,7 @@ namespace School.DAL.Repository
                 .Include(t => t.Class);
 
         public Teacher GetOneRelated(int? id) =>
-            GetRelatedData().First(t => t.Id == id);
+            GetRelatedData().ToList().Find(t => t.Id == id);
 
         public override Teacher GetOne(int? id) =>
             GetAll().First(t => t.Id == id);

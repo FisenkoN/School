@@ -21,9 +21,9 @@ namespace School.DAL.Repository
                  Select(s => s).
                  ToList();
 
-        public override Subject GetOne(int? id) =>
-            GetAll().
-                First(s => s.Id == id);
+        // public override Subject GetOne(int? id) =>
+        //     GetAll().
+        //         First(s => s.Id == id);
 
         public IIncludableQueryable<Subject, ICollection<Teacher>> GetRelatedData() => 
             DbContext.Subjects.Include(s => s.Students)

@@ -11,7 +11,15 @@ namespace School.UI
         private static void Main(string[] args)
         {
             MainService.Start();
-            MainInterface();
+            //MainInterface();
+            Test();
+        }
+
+        private static void Test()
+        {
+            var admin = new AdminService();
+            
+            admin.Teachers_Edit_Subjects(1,new List<int>{1,2,3});
         }
 
         static void MainInterface()
@@ -819,7 +827,31 @@ namespace School.UI
                                                 Console.WriteLine("Class was edit");
                                                 break;
                                             case "6":
-                                                Console.WriteLine("Sorry, but now you can't edit this property (;");
+                                                Console.WriteLine("Subjects:\n");
+                                                foreach (var subjectDto in adminService.Subjects_GetAll())
+                                                {
+                                                    Console.WriteLine($"Id: {subjectDto.Id} Name: {subjectDto.Name}");
+                                                }
+
+                                                var subjectIds = new List<int>();
+                                                
+                                                Console.WriteLine();
+
+                                                var subId = -1;
+                                                
+                                                do
+                                                {
+                                                    subId = int.Parse(Console.ReadLine());
+                                                    if (subId == 0)
+                                                    {
+                                                        break;
+                                                    }
+                                                    subjectIds.Add(subId);
+                                                    
+                                                } while (true);
+                                                
+                                                adminService.Teachers_Edit_Subjects(id_Edit, subjectIds);
+                                                
                                                 break;
                                         }
                                         

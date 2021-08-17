@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9xug9m+3XxZ46yvvnZa+t2s2YcP59hDRB2BPMsglZHAusD1rjR1QNRr6+qGA7UQP9eu+TUYuPLifRp+W+EoG6w==",
+  "dgSpecHash": "a67CPMnZuHLUFICg+/1OPlrIrf+nUzpFQxC9GwNHfwNugRNyyKVvJKgPe7sFs+inN+6tiCtpFPCVkDhPqFGPNA==",
   "success": true,
-  "projectFilePath": "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj",
+  "projectFilePath": "G:\\Core\\School\\School.DAL\\School.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nazar\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

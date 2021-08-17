@@ -244,7 +244,20 @@ namespace School.BLL.Services
 
         public void Teachers_Edit_Subjects(int? id, List<int> subjects)
         {
+            var teacher = _teacherRepository.GetOneRelated(id);
             
+            teacher.Subjects.Clear();
+
+            _teacherRepository.Update(teacher);
+            
+            teacher = _teacherRepository.GetOneRelated(id);
+
+            for (int i = 0; i < subjects.Count; i++)
+            {
+                teacher.Subjects.Add(_subjectRepository.GetOne(subjects[i]));
+            }
+
+            _teacherRepository.Update(teacher);
         }
     }
 }

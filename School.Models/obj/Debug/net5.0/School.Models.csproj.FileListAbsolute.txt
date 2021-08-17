@@ -10,3 +10,15 @@ E:\Tasks\School\School.Models\obj\Debug\net5.0\School.Models.csproj.CoreCompileI
 E:\Tasks\School\School.Models\obj\Debug\net5.0\School.Models.dll
 E:\Tasks\School\School.Models\obj\Debug\net5.0\ref\School.Models.dll
 E:\Tasks\School\School.Models\obj\Debug\net5.0\School.Models.pdb
+G:\Core\School\School.Models\bin\Debug\net5.0\School.Models.deps.json
+G:\Core\School\School.Models\bin\Debug\net5.0\School.Models.dll
+G:\Core\School\School.Models\bin\Debug\net5.0\ref\School.Models.dll
+G:\Core\School\School.Models\bin\Debug\net5.0\School.Models.pdb
+G:\Core\School\School.Models\obj\Debug\net5.0\School.Models.csproj.AssemblyReference.cache
+G:\Core\School\School.Models\obj\Debug\net5.0\School.Models.GeneratedMSBuildEditorConfig.editorconfig
+G:\Core\School\School.Models\obj\Debug\net5.0\School.Models.AssemblyInfoInputs.cache
+G:\Core\School\School.Models\obj\Debug\net5.0\School.Models.AssemblyInfo.cs
+G:\Core\School\School.Models\obj\Debug\net5.0\School.Models.csproj.CoreCompileInputs.cache
+G:\Core\School\School.Models\obj\Debug\net5.0\School.Models.dll
+G:\Core\School\School.Models\obj\Debug\net5.0\ref\School.Models.dll
+G:\Core\School\School.Models\obj\Debug\net5.0\School.Models.pdb

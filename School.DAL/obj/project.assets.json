@@ -6657,11 +6657,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj",
+      "projectUniqueName": "G:\\Core\\School\\School.DAL\\School.DAL.csproj",
       "projectName": "School.DAL",
-      "projectPath": "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj",
+      "projectPath": "G:\\Core\\School\\School.DAL\\School.DAL.csproj",
       "packagesPath": "C:\\Users\\Nazar\\.nuget\\packages\\",
-      "outputPath": "E:\\Tasks\\School\\School.DAL\\obj\\",
+      "outputPath": "G:\\Core\\School\\School.DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -6684,8 +6684,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\Tasks\\School\\School.Models\\School.Models.csproj": {
-              "projectPath": "E:\\Tasks\\School\\School.Models\\School.Models.csproj"
+            "G:\\Core\\School\\School.Models\\School.Models.csproj": {
+              "projectPath": "G:\\Core\\School\\School.Models\\School.Models.csproj"
             }
           }
         }

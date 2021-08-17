@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Tasks\\School\\School.UI\\School.UI.csproj": {}
+    "G:\\Core\\School\\School.UI\\School.UI.csproj": {}
   },
   "projects": {
-    "E:\\Tasks\\School\\School.BLL\\School.BLL.csproj": {
+    "G:\\Core\\School\\School.BLL\\School.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Tasks\\School\\School.BLL\\School.BLL.csproj",
+        "projectUniqueName": "G:\\Core\\School\\School.BLL\\School.BLL.csproj",
         "projectName": "School.BLL",
-        "projectPath": "E:\\Tasks\\School\\School.BLL\\School.BLL.csproj",
+        "projectPath": "G:\\Core\\School\\School.BLL\\School.BLL.csproj",
         "packagesPath": "C:\\Users\\Nazar\\.nuget\\packages\\",
-        "outputPath": "E:\\Tasks\\School\\School.BLL\\obj\\",
+        "outputPath": "G:\\Core\\School\\School.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -34,8 +34,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj": {
-                "projectPath": "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj"
+              "G:\\Core\\School\\School.DAL\\School.DAL.csproj": {
+                "projectPath": "G:\\Core\\School\\School.DAL\\School.DAL.csproj"
               }
             }
           }
@@ -68,14 +68,14 @@
         }
       }
     },
-    "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj": {
+    "G:\\Core\\School\\School.DAL\\School.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj",
+        "projectUniqueName": "G:\\Core\\School\\School.DAL\\School.DAL.csproj",
         "projectName": "School.DAL",
-        "projectPath": "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj",
+        "projectPath": "G:\\Core\\School\\School.DAL\\School.DAL.csproj",
         "packagesPath": "C:\\Users\\Nazar\\.nuget\\packages\\",
-        "outputPath": "E:\\Tasks\\School\\School.DAL\\obj\\",
+        "outputPath": "G:\\Core\\School\\School.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -98,8 +98,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\Tasks\\School\\School.Models\\School.Models.csproj": {
-                "projectPath": "E:\\Tasks\\School\\School.Models\\School.Models.csproj"
+              "G:\\Core\\School\\School.Models\\School.Models.csproj": {
+                "projectPath": "G:\\Core\\School\\School.Models\\School.Models.csproj"
               }
             }
           }
@@ -160,14 +160,14 @@
         }
       }
     },
-    "E:\\Tasks\\School\\School.Models\\School.Models.csproj": {
+    "G:\\Core\\School\\School.Models\\School.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Tasks\\School\\School.Models\\School.Models.csproj",
+        "projectUniqueName": "G:\\Core\\School\\School.Models\\School.Models.csproj",
         "projectName": "School.Models",
-        "projectPath": "E:\\Tasks\\School\\School.Models\\School.Models.csproj",
+        "projectPath": "G:\\Core\\School\\School.Models\\School.Models.csproj",
         "packagesPath": "C:\\Users\\Nazar\\.nuget\\packages\\",
-        "outputPath": "E:\\Tasks\\School\\School.Models\\obj\\",
+        "outputPath": "G:\\Core\\School\\School.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -220,14 +220,14 @@
         }
       }
     },
-    "E:\\Tasks\\School\\School.UI\\School.UI.csproj": {
+    "G:\\Core\\School\\School.UI\\School.UI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Tasks\\School\\School.UI\\School.UI.csproj",
+        "projectUniqueName": "G:\\Core\\School\\School.UI\\School.UI.csproj",
         "projectName": "School.UI",
-        "projectPath": "E:\\Tasks\\School\\School.UI\\School.UI.csproj",
+        "projectPath": "G:\\Core\\School\\School.UI\\School.UI.csproj",
         "packagesPath": "C:\\Users\\Nazar\\.nuget\\packages\\",
-        "outputPath": "E:\\Tasks\\School\\School.UI\\obj\\",
+        "outputPath": "G:\\Core\\School\\School.UI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -250,11 +250,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\Tasks\\School\\School.BLL\\School.BLL.csproj": {
-                "projectPath": "E:\\Tasks\\School\\School.BLL\\School.BLL.csproj"
+              "G:\\Core\\School\\School.BLL\\School.BLL.csproj": {
+                "projectPath": "G:\\Core\\School\\School.BLL\\School.BLL.csproj"
               },
-              "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj": {
-                "projectPath": "E:\\Tasks\\School\\School.DAL\\School.DAL.csproj"
+              "G:\\Core\\School\\School.DAL\\School.DAL.csproj": {
+                "projectPath": "G:\\Core\\School\\School.DAL\\School.DAL.csproj"
               }
             }
           }
