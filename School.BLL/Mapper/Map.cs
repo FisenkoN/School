@@ -27,7 +27,7 @@ namespace School.BLL.Mapper
             {
                 Id = c.Id,
                 Name = c.Name,
-                Timestamp = c.Timestamp,
+                // Timestamp = c.Timestamp,
                 TeacherId = c.TeacherId,
                 StudentIds = c.Students.Select(s=>s.Id)
             };
@@ -42,7 +42,7 @@ namespace School.BLL.Mapper
                 LastName = s.LastName,
                 Gender = (GenderDto)s.Gender,
                 SubjectIds = s.Subjects.Select(s=>s.Id),
-                Timestamp = s.Timestamp
+                // Timestamp = s.Timestamp
             };
 
         public static TeacherDto To(Teacher t) =>
@@ -51,11 +51,11 @@ namespace School.BLL.Mapper
                 Id = t.Id,
                 FirstName = t.FirstName,
                 LastName = t.LastName,
-                Timestamp = t.Timestamp,
+                // Timestamp = t.Timestamp,
                 Age = t.Age,
                 ClassId = t.ClassId,
                 Gender = (GenderDto)t.Gender,
-                SubjectIds = t.Subjects.Select(s=>s.Id)
+                SubjectIds = t.Subjects!=null?t.Subjects.Select(s=>s.Id):null
             };
 
         public static SubjectDto To(Subject s) =>
@@ -63,7 +63,7 @@ namespace School.BLL.Mapper
             {
                 Id = s.Id,
                 Name = s.Name,
-                Timestamp = s.Timestamp,
+                // Timestamp = s.Timestamp,
                 StudentIds = s.Students.Select(s => s.Id),
                 TeacherIds = s.Teachers.Select(t => t.Id)
             };
@@ -73,13 +73,13 @@ namespace School.BLL.Mapper
             {
                 Id = s.Id,
                 Name = s.Name,
-                Timestamp = s.Timestamp,
-                Students = _studentRepository.GetAll()
+                // Timestamp = s.Timestamp,
+                Students = s.StudentIds != null? _studentRepository.GetAll()
                     .Where(i=>s.StudentIds.ToList().
-                        Exists(t=>t== i.Id)).ToList(),
-                Teachers = _teacherRepository.GetAll()
+                        Exists(t=>t== i.Id)).ToList():null,
+                Teachers = s.TeacherIds  != null ? _teacherRepository.GetAll()
                     .Where(i=>s.TeacherIds.ToList().
-                        Exists(t=>t== i.Id)).ToList()
+                        Exists(t=>t== i.Id)).ToList():null
             };
 
         public static Class To(ClassDto c) =>
@@ -89,7 +89,7 @@ namespace School.BLL.Mapper
                 Name = c.Name,
                 TeacherId = c.TeacherId,
                 // Teacher = TeacherRepository.GetOne(c.TeacherId),
-                Timestamp = c.Timestamp,
+                // Timestamp = c.Timestamp,
                 Students = _studentRepository.GetAll()
                     .Where(i => c.StudentIds.ToList().
                         Exists(t => t == i.Id)).ToList()
@@ -103,7 +103,7 @@ namespace School.BLL.Mapper
                 ClassId = s.ClassId,
                 FirstName = s.FirstName,
                 LastName = s.LastName,
-                Timestamp = s.Timestamp,
+                // Timestamp = s.Timestamp,
                 Gender = (Gender) s.Gender,
                 Subjects = _subjectRepository.GetAll()
                     .Where(i => s.SubjectIds.ToList().Exists(t => t == i.Id)).ToList()
@@ -118,9 +118,9 @@ namespace School.BLL.Mapper
                 FirstName = t.FirstName,
                 Gender = (Gender)t.Gender,
                 LastName = t.LastName,
-                Timestamp = t.Timestamp,
-                Subjects = _subjectRepository.GetAll()
-                    .Where(i => t.SubjectIds.ToList().Exists(s => s == i.Id)).ToList()
+                // Timestamp = t.Timestamp,
+                Subjects = t.SubjectIds != null?_subjectRepository.GetAll()
+                    .Where(i => t.SubjectIds.ToList().Exists(s => s == i.Id)).ToList():null
             };
     }
 }

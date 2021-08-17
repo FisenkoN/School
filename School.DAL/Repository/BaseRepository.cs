@@ -69,7 +69,9 @@ namespace School.DAL.Repository
 
         public virtual int Update(T entity)
         {
+            // db.Entry(entity).State = EntityState.Detached;
             table.Update(entity);
+            
             return SaveChanges();
         }
 
@@ -79,9 +81,9 @@ namespace School.DAL.Repository
             return SaveChanges();
         }
 
-        public int Delete(int id, byte[] timestamp)
+        public int Delete(int id)
         {
-            Delete(table.First(t=>t.Id==id && t.Timestamp == timestamp));
+            Delete(table.FirstOrDefault(t=>t.Id==id));
 
             return SaveChanges();
         }

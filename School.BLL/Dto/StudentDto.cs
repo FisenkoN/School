@@ -6,7 +6,7 @@ namespace School.BLL.Dto
     {
         public int Id { get; set; }
 
-        public byte[] Timestamp { get; set; }
+        //public byte[] Timestamp { get; set; }
 
         public string FullName => FirstName + " " + LastName;
 

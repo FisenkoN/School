@@ -74,7 +74,7 @@ namespace School.BLL.Services
         }
 
         public int DeleteStudent(StudentDto s) =>
-            _studentRepository.Delete(s.Id, s.Timestamp);
+            _studentRepository.Delete(s.Id);
 
         public void Edit_FirstName(int? id, string firstName)
         {
@@ -125,14 +125,15 @@ namespace School.BLL.Services
 
         public void Edit_Subjects(int? id, int?[] subjectIds)
         {
-            var s = _studentRepository.GetOne(id);
-            var list = new List<Subject>();
-            foreach (var t in subjectIds)
-            {
-                s.Subjects.Clear();
-                s.Subjects.Add(_subjectRepository.GetOne(t));
-            }
+            var s = _studentRepository.GetOneRelated(id);
+            
+            s.Subjects.Clear();
 
+            for (int i = 0; i < subjectIds.Length; i++)
+            {
+                s.Subjects.Add(_subjectRepository.GetOne(subjectIds[i]));
+            }
+            
             _studentRepository.Update(s);
 
         }

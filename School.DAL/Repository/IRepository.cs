@@ -16,7 +16,7 @@ namespace School.DAL.Repository
         
         int Update(IList<T> entities);
         
-        int Delete(int id, byte[] timestamp);
+        int Delete(int id);
         
         int Delete(T entity);
         

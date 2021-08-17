@@ -7,8 +7,8 @@ namespace School.DAL.Entities
         [Key]
          public int Id { get; set; }
 
-        [Timestamp]
-        public byte[] Timestamp { get; set; }
+        // [Timestamp]
+        // public byte[] Timestamp { get; set; }
         
     }
 }

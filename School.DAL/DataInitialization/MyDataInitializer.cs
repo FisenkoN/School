@@ -36,10 +36,10 @@ namespace School.DAL.DataInitialization
             var subj11 = new Subject {Name = "Swimming", Teachers = new List<Teacher>{t9}};
             var subj12 = new Subject {Name = "Physical education", Teachers = new List<Teacher>{t9}};
 
-            dbContext.Subjects.AddRange(subj1, subj2, subj3, subj4, subj5, subj6, subj7, subj8, subj9, subj10, subj11,
-                subj12);
+             dbContext.Subjects.AddRange(subj1, subj2, subj3, subj4, subj5, subj6, subj7, subj8, subj9, subj10, subj11,
+                 subj12);
 
-            //dbContext.SaveChanges();
+            dbContext.SaveChanges();
 
             var c1 = new Class {Name = "10A", Teacher = t1, TeacherId = t1.Id};
             var c2 = new Class {Name = "10B", Teacher = t6, TeacherId = t6.Id};
@@ -57,74 +57,226 @@ namespace School.DAL.DataInitialization
             var subj_packet_5 = new List<Subject>() {subj10, subj12, subj4, subj7, subj5, subj2, subj11};
             var subj_packet_6 = new List<Subject>() {subj10, subj12, subj4, subj7, subj5, subj2, subj11, subj1, subj3, subj6, subj8, subj9};
             
-            //dbContext.SaveChanges();
+            dbContext.SaveChanges();
 
             var s1 = new Student
-                {FirstName = "Rebecca", LastName = "King", Age = 16, Class = c1, ClassId = c1.Id, Gender = Gender.Female, Subjects = subj_packet_1};
+                {FirstName = "Rebecca", LastName = "King", Age = 16, Class = c1, ClassId = c1.Id, Gender = Gender.Female};
+            
             var s2 = new Student
-                {FirstName = "Melissa", LastName = "Thompson", Age = 17, Class = c1, ClassId = c1.Id, Gender = Gender.Female, Subjects = subj_packet_2};
+                {FirstName = "Melissa", LastName = "Thompson", Age = 17, Class = c1, ClassId = c1.Id, Gender = Gender.Female};
+            
             var s3 = new Student
-                {FirstName = "George", LastName = "Long", Age = 16, Class = c1, ClassId = c1.Id, Gender = Gender.Male, Subjects = subj_packet_1};
+                {FirstName = "George", LastName = "Long", Age = 16, Class = c1, ClassId = c1.Id, Gender = Gender.Male};
+            
             var s4 = new Student
-                {FirstName = "Karen", LastName = "Bell", Age = 16, Class = c2, ClassId = c2.Id, Gender = Gender.Male, Subjects = subj_packet_3};
+                {FirstName = "Karen", LastName = "Bell", Age = 16, Class = c2, ClassId = c2.Id, Gender = Gender.Male};
+            
             var s5 = new Student
-                {FirstName = "Louise", LastName = "Bryant", Age = 17, Class = c2, ClassId = c2.Id, Gender = Gender.Male, Subjects = subj_packet_4};
+                {FirstName = "Louise", LastName = "Bryant", Age = 17, Class = c2, ClassId = c2.Id, Gender = Gender.Male};
+            
+            
             var s6 = new Student
-                {FirstName = "Carolyn", LastName = "Mitchell", Age = 16, Class = c2, ClassId = c2.Id, Gender = Gender.Female, Subjects = subj_packet_1};
+                {FirstName = "Carolyn", LastName = "Mitchell", Age = 16, Class = c2, ClassId = c2.Id, Gender = Gender.Female};
+            
             var s7 = new Student
-                {FirstName = "Matthew", LastName = "Hill", Age = 16, Class = c2, ClassId = c2.Id, Gender = Gender.Male, Subjects = subj_packet_5};
+                {FirstName = "Matthew", LastName = "Hill", Age = 16, Class = c2, ClassId = c2.Id, Gender = Gender.Male};
+            
             var s8 = new Student
-                {FirstName = "Jessica", LastName = "Patterson", Age = 16, Class = c3, ClassId = c3.Id, Gender = Gender.Female, Subjects = subj_packet_6};
+                {FirstName = "Jessica", LastName = "Patterson", Age = 16, Class = c3, ClassId = c3.Id, Gender = Gender.Female};
+            
             var s9 = new Student
-                {FirstName = "Sandra", LastName = "Lopez", Age = 17, Class = c3, ClassId = c3.Id, Gender = Gender.Female, Subjects = subj_packet_2};
+                {FirstName = "Sandra", LastName = "Lopez", Age = 17, Class = c3, ClassId = c3.Id, Gender = Gender.Female};
+            
             var s10 = new Student
-                {FirstName = "Beverly", LastName = "Howard", Age = 16, Class = c3, ClassId = c3.Id, Gender = Gender.Female, Subjects = subj_packet_6};
+                {FirstName = "Beverly", LastName = "Howard", Age = 16, Class = c3, ClassId = c3.Id, Gender = Gender.Female};
+            
             var s11 = new Student
-                {FirstName = "Carol", LastName = "Campbell", Age = 17, Class = c3, ClassId = c3.Id, Gender = Gender.Female, Subjects = subj_packet_4};
+                {FirstName = "Carol", LastName = "Campbell", Age = 17, Class = c3, ClassId = c3.Id, Gender = Gender.Female};
+            
             var s12 = new Student
-                {FirstName = "Richard", LastName = "Parker", Age = 16, Class = c3, ClassId = c3.Id, Gender = Gender.Male, Subjects = subj_packet_2};
+                {FirstName = "Richard", LastName = "Parker", Age = 16, Class = c3, ClassId = c3.Id, Gender = Gender.Male};
+            
             var s13 = new Student
-                {FirstName = "Todd", LastName = "Alexander", Age = 17, Class = c4, ClassId = c4.Id, Gender = Gender.Male, Subjects = subj_packet_4};
+                {FirstName = "Todd", LastName = "Alexander", Age = 17, Class = c4, ClassId = c4.Id, Gender = Gender.Male};
+            
             var s14 = new Student
-                {FirstName = "Donna", LastName = "Butler", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Female, Subjects = subj_packet_4};
+                {FirstName = "Donna", LastName = "Butler", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Female};
+            
             var s15 = new Student
-                {FirstName = "Howard", LastName = "Roberts", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male, Subjects = subj_packet_3};
+                {FirstName = "Howard", LastName = "Roberts", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male};
+            
             var s16 = new Student
-                {FirstName = "Frank", LastName = "Wilson", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male, Subjects = subj_packet_6};
+                {FirstName = "Frank", LastName = "Wilson", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male};
+            
             var s17 = new Student
-                {FirstName = "George", LastName = "Diaz", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male, Subjects = subj_packet_1};
+                {FirstName = "George", LastName = "Diaz", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male};
+            
             var s18 = new Student
-                {FirstName = "Chris", LastName = "Griffin", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male, Subjects = subj_packet_1};
+                {FirstName = "Chris", LastName = "Griffin", Age = 16, Class = c4, ClassId = c4.Id, Gender = Gender.Male};
+            
             var s19 = new Student
-                {FirstName = "Amanda", LastName = "James", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Female, Subjects = subj_packet_6};
+                {FirstName = "Amanda", LastName = "James", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Female};
+            
             var s20 = new Student
-                {FirstName = "Sandra", LastName = "Miller", Age = 18, Class = c5, ClassId = c5.Id, Gender = Gender.Female, Subjects = subj_packet_3};
+                {FirstName = "Sandra", LastName = "Miller", Age = 18, Class = c5, ClassId = c5.Id, Gender = Gender.Female};
+            
             var s21 = new Student
-                {FirstName = "Carol", LastName = "Washington", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Female, Subjects = subj_packet_3};
+                {FirstName = "Carol", LastName = "Washington", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Female};
+            
             var s22 = new Student
-                {FirstName = "Doris", LastName = "Johnson", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Female, Subjects = subj_packet_6};
+                {FirstName = "Doris", LastName = "Johnson", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Female};
+            
             var s23 = new Student
-                {FirstName = "Eugene", LastName = "Wright", Age = 16, Class = c5, ClassId = c5.Id, Gender = Gender.Male, Subjects = subj_packet_2};
+                {FirstName = "Eugene", LastName = "Wright", Age = 16, Class = c5, ClassId = c5.Id, Gender = Gender.Male};
+            
             var s24 = new Student
-                {FirstName = "Margaret", LastName = "Collins", Age = 16, Class = c5, ClassId = c5.Id, Gender = Gender.Female, Subjects = subj_packet_5};
+                {FirstName = "Margaret", LastName = "Collins", Age = 16, Class = c5, ClassId = c5.Id, Gender = Gender.Female};
+            
             var s25 = new Student
-                {FirstName = "Henry", LastName = "Hall", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Male, Subjects = subj_packet_5};
+                {FirstName = "Henry", LastName = "Hall", Age = 17, Class = c5, ClassId = c5.Id, Gender = Gender.Male};
+            
             var s26 = new Student
-                {FirstName = "Frances ", LastName = "Thomas", Age = 14, Class = c6, ClassId = c6.Id, Gender = Gender.Female, Subjects = subj_packet_6};
+                {FirstName = "Frances ", LastName = "Thomas", Age = 14, Class = c6, ClassId = c6.Id, Gender = Gender.Female};
+            
             var s27 = new Student
-                {FirstName = "Pamela", LastName = "Bennett", Age = 15, Class = c6, ClassId = c6.Id, Gender = Gender.Female, Subjects = subj_packet_2};
+                {FirstName = "Pamela", LastName = "Bennett", Age = 15, Class = c6, ClassId = c6.Id, Gender = Gender.Female};
+            
             var s28 = new Student
-                {FirstName = "Kimberly", LastName = "Morgan", Age = 14, Class = c6, ClassId = c6.Id, Gender = Gender.Female, Subjects = subj_packet_3};
+                {FirstName = "Kimberly", LastName = "Morgan", Age = 14, Class = c6, ClassId = c6.Id, Gender = Gender.Female};
+            
             var s29 = new Student
-                {FirstName = "Terry", LastName = "Campbell", Age = 14, Class = c6, ClassId = c6.Id, Gender = Gender.Male, Subjects = subj_packet_6};
+                {FirstName = "Terry", LastName = "Campbell", Age = 14, Class = c6, ClassId = c6.Id, Gender = Gender.Male};
+            
             var s30 = new Student
-                {FirstName = "Rachel", LastName = "Patterson", Age = 15, Class = c6, ClassId = c6.Id, Gender = Gender.Female, Subjects = subj_packet_1};
+                {FirstName = "Rachel", LastName = "Patterson", Age = 15, Class = c6, ClassId = c6.Id, Gender = Gender.Female};
+            
             var s31 = new Student
-                {FirstName = "Olha", LastName = "Cina", Age = 11, Gender = Gender.Female, Subjects = subj_packet_6};
+                {FirstName = "Olha", LastName = "Cina", Age = 11, Gender = Gender.Female};
+            
             var s32 = new Student
-                {FirstName = "Terry", LastName = "Opraa", Age = 12,Gender = Gender.Male, Subjects = subj_packet_1};
+                {FirstName = "Terry", LastName = "Opraa", Age = 12,Gender = Gender.Male};
+            
             var s33 = new Student
-                {FirstName = "Sin", LastName = "Bad",Age = 15, Gender = Gender.Male, Subjects = subj_packet_3};
+                {FirstName = "Sin", LastName = "Bad", Age = 15, Gender = Gender.Male};
+            
+            foreach (var subject in subj_packet_3)
+            {
+                s28.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_6)
+            {
+                s29.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_1)
+            {
+                s30.Subjects.Add(subject);
+            }
+            
+            foreach (var subject in subj_packet_1)
+            {
+                s18.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_4)
+            {
+                s13.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_2)
+            {
+                s12.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_4)
+            {
+                s11.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_4)
+            {
+                s14.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_3)
+            {
+                s15.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_6)
+            {
+                s16.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_1)
+            {
+                s17.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_5)
+            {
+                s25.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_3)
+            {
+                s20.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_3)
+            {
+                s21.Subjects.Add(subject);
+            }foreach (var subject in subj_packet_6)
+            {
+                s19.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_6)
+            {
+                s22.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_2)
+            {
+                s23.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_5)
+            {
+                s24.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_6)
+            {
+                s10.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_2)
+            {
+                s9.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_6)
+            {
+                s8.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_5)
+            {
+                s7.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_1)
+            {
+                s6.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_4)
+            {
+                s5.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_6)
+            {
+                s26.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_2)
+            {
+                s27.Subjects.Add(subject);
+            }
+            foreach (var subject in subj_packet_6)
+            {
+                s31.Subjects.Add(subject);
+            }
+            
+            foreach (var subject in subj_packet_1)
+            {
+                s32.Subjects.Add(subject);
+            }
+            
+            foreach (var subject in subj_packet_3)
+            {
+                s33.Subjects.Add(subject);
+            }
             
             dbContext.Students.AddRange(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18,
                 s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33);

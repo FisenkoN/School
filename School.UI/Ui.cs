@@ -7,10 +7,10 @@ using School.BLL.Services;
 
 namespace School.UI
 {
-    public static class StudentsUi
+    public static class Ui
     {
         private static StudentService _studentService;
-        static StudentsUi()
+        static Ui()
         {
             _studentService = new StudentService();
             
