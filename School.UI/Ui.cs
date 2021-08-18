@@ -15,16 +15,6 @@ namespace School.UI
             _studentService = new StudentService(main.GetDb());
             
         }
-
-        public static void DeleteStudent(int? id)
-        {
-            
-            if (id!= null)
-            {   
-                  
-            }
-        }
-        
         public static void ShowFullInfo(StudentDto s)
         {
             if (s!= null)

@@ -35,17 +35,5 @@ namespace School.DAL
                 . ConfigureWarnings (warnings=>
                     warnings.Throw(RelationalEventId.QueryPossibleUnintendedUseOfEqualsWarning) ) ;
         }
-
-         protected override void OnModelCreating(ModelBuilder modelBuilder)
-         {
-             modelBuilder.Entity<Teacher>()
-                 .HasOne(t => t.Class)
-                 .WithOne(c => c.Teacher)
-                 .OnDelete(DeleteBehavior.ClientSetNull);
-
-             modelBuilder.Entity<Student>()
-                 .HasOne(s => s.Class)
-                 .WithMany(c => c.Students).OnDelete(DeleteBehavior.ClientSetNull);
-         }
     }
 }
