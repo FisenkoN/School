@@ -15,11 +15,6 @@ namespace School.DAL.Repository
         private SchoolDbContext db;
 
         protected SchoolDbContext DbContext => db;
-
-        public BaseRepository():this(new SchoolDbContext())
-        {
-        }
-
         public BaseRepository(SchoolDbContext db)
         {
             this.db = db;
@@ -27,7 +22,7 @@ namespace School.DAL.Repository
         }
         
         
-        public virtual int Add(T entity)
+        public int Add(T entity)
         {
             table.Add(entity);
             return SaveChanges();
@@ -67,7 +62,7 @@ namespace School.DAL.Repository
             return SaveChanges();
         }
 
-        public virtual int Update(T entity)
+        public int Update(T entity)
         {
             // db.Entry(entity).State = EntityState.Detached;
             table.Update(entity);
@@ -88,13 +83,13 @@ namespace School.DAL.Repository
             return SaveChanges();
         }
 
-        public virtual int Delete(T entity)
+        public int Delete(T entity)
         {
             db.Entry(entity).State = EntityState.Deleted;
             return SaveChanges();
         }
 
-        public virtual T GetOne(int? id) => table.Find(id);
+        public T GetOne(int? id) => table.Find(id);
 
         public virtual IQueryable<T> GetSome(Expression<Func<T, bool>> @where)
             => table.Where(where);

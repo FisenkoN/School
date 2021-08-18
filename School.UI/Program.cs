@@ -10,24 +10,15 @@ namespace School.UI
     {
         private static void Main(string[] args)
         {
-            MainService.Start();
-            //MainInterface();
-            Test();
+            var main = new MainService();
+            MainInterface(main);
         }
-
-        private static void Test()
-        {
-            var admin = new AdminService();
-            
-            admin.Teachers_Edit_Subjects(1,new List<int>{1,2,3});
-        }
-
-        static void MainInterface()
+        static void MainInterface(MainService main)
         {
             int mainChoice;
             Console.WriteLine("********** Welcome to My App **********");
             Console.WriteLine("If you want be like:   pls input correct number");
-            Console.WriteLine("Admin: 1\nStudent: 2\nTeacher: 3\nVisitor: 4\nElse you attempt will be incorrect");
+            Console.WriteLine("Admin: 1\nStudent: 2\nVisitor: 4\nElse you attempt will be incorrect");
             Console.WriteLine();
 
             try
@@ -43,16 +34,16 @@ namespace School.UI
             switch (mainChoice)
             {
                 case 1:
-                    AdminInterface();
+                    AdminInterface(main);
                     break;
                 case 2:
-                    StudentInterface();
+                    StudentInterface(main);
                     break;
                 // case 3:
                 //     TeacherInterface();
                 //     break;
                 case 4:
-                    VisitorInterface();
+                    VisitorInterface(main);
                     break;
                 default:
                     Console.WriteLine("You entered incorrect value(:  bye, bye ");
@@ -61,10 +52,10 @@ namespace School.UI
             
             Console.WriteLine("Thanks for use my app, you can test my app like other user)");
         }
-
-        static void StudentInterface()
+        static void StudentInterface(MainService main)
         {
-            var studentService = new StudentService();
+            var ui = new Ui(main);
+            var studentService = new StudentService(main.GetDb());
             int choiceMainStudent;
             Console.WriteLine("So, You can find your page for id, full name and EDIT, DELETE page");
             Console.WriteLine();
@@ -133,7 +124,7 @@ namespace School.UI
                                                           "Age              3\n" +
                                                           "Gender           4\n" +
                                                           "Class            5\n" +
-                                                          "Students         6\n" +
+                                                          "Subjects         6\n" +
                                                           "Exit             0\n" +
                                                           "Repeat           any key\n\n");
 
@@ -186,29 +177,36 @@ namespace School.UI
                                                 studentService.Edit_Class(id, classChoice);
                                                 break;
                                             case "6":
-                                                // Console.WriteLine("Subjects: \n");
-                                                // var subjects = studentService.GetSubjects();
-                                                // for (int i = 0; i < subjects.Count; i++)
-                                                // {
-                                                //     Console.WriteLine(subjects[i] + "\t\t" + (i + 1));
-                                                // }
-                                                //
-                                                // var subId = 1;
-                                                //
-                                                // List<int?> ints = new List<int?>();
-                                                //
-                                                // while (true)
-                                                // {
-                                                //     subId = int.Parse(Console.ReadLine());
-                                                //     if (subId <= 0 || subId > subjects.Count)
-                                                //     {
-                                                //         break;
-                                                //     }
-                                                //     ints.Add(subId);
-                                                // }
-                                                //
-                                                // studentService.Edit_Subjects(id,ints.ToArray());
-                                                Console.WriteLine("Sorry, this functional will be added in future updates(;");
+                                                Console.WriteLine("Subjects: \n");
+                                                var subjects = studentService.GetSubjects();
+                                                
+                                                foreach (var subject in subjects)
+                                                {
+                                                    Console.WriteLine($"Id: {subject.Id}\t\tName: {subject.Name}");
+                                                }
+
+                                                int subId;
+                                                
+                                                var subjectIds = new List<int>();
+                                                Console.WriteLine("Enter subjects id, pls input only correct value)");
+                                                while (true)
+                                                {
+                                                    try
+                                                    {
+                                                        subId = int.Parse(Console.ReadLine());
+                                                    }
+                                                    catch (Exception)
+                                                    {
+                                                        continue;
+                                                    }
+                                                    if (subId == 0)
+                                                    {
+                                                        break;
+                                                    }
+                                                    subjectIds.Add(subId);
+                                                }
+                                                
+                                                studentService.Edit_Subjects(id,subjectIds);
                                                 break;
                                         }
                                         
@@ -217,8 +215,8 @@ namespace School.UI
                                     break;
                                 
                                 case 2:
-                                    Ui.DeleteStudent(id);
-
+                                    studentService.DeleteStudent(studentService.GetStudentForId(id));
+                                    
                                     Console.WriteLine("You data is deleted ;)");
                                         
                                     return;
@@ -263,9 +261,9 @@ namespace School.UI
                 }
             } while (choiceMainStudent != 0);
         }
-        static void AdminInterface()
+        static void AdminInterface(MainService main)
         {
-            var adminService = new AdminService();
+            var adminService = new AdminService(main.GetDb());
             
             string choiceMain;
             Console.WriteLine("You can make CRUD operation with every table:\n");
@@ -281,7 +279,7 @@ namespace School.UI
                 choiceMain = Console.ReadLine();
                 switch (choiceMain)
                 {
-                    //problem in create and edit with "Subjects"
+                    //all work
                     case "1":
                         Console.Clear();
                         string choiceCrud;
@@ -447,7 +445,38 @@ namespace School.UI
                                             Console.WriteLine();
                                             break;
                                         case "6":
-                                            Console.WriteLine("Sorry, but now you can't edit this property (;");
+                                            Console.WriteLine("Subjects: \n");
+                                            var subs = adminService.Subjects_GetAll();
+                                                
+                                            foreach (var subject in subs)
+                                            {
+                                                Console.WriteLine($"Id: {subject.Id}\t\tName: {subject.Name}");
+                                            }
+
+                                            int subId;
+                                                
+                                            var subjectIds = new List<int>();
+                                            Console.WriteLine("Enter subjects id, pls input only correct value)");
+                                            while (true)
+                                            {
+                                                try
+                                                {
+                                                    subId = int.Parse(Console.ReadLine());
+                                                }
+                                                catch (Exception)
+                                                {
+                                                    continue;
+                                                }
+                                                if (subId == 0)
+                                                {
+                                                    break;
+                                                }
+                                                subjectIds.Add(subId);
+                                            }
+                                                
+                                            adminService.Students_Edit_Subjects(id_Edit,subjectIds);
+
+                                            Console.WriteLine("Subjects was edit");
                                             break;
                                         case "0":
                                             return;
@@ -492,24 +521,24 @@ namespace School.UI
 
                                     Console.WriteLine();
 
-                                    // Console.WriteLine("Subjects:\n");
-                                    // foreach (var subject in adminService.Subjects_GetAll())
-                                    // {
-                                    //     Console.WriteLine($"Id: {subject.Id}\tName: {subject.Name}");
-                                    // }
-                                    //
-                                    // Console.WriteLine("Please enter 0 to stop)\"" +
-                                    //                   "Please input only correct id");
-                                    // Console.WriteLine();
-                                    // while (true)
-                                    // {
-                                    //     var tmp = int.Parse(Console.ReadLine());
-                                    //     if (tmp== 0)
-                                    //     {
-                                    //         break;
-                                    //     }
-                                    //     subjects.Add(tmp);
-                                    // }
+                                    Console.WriteLine("Subjects:\n");
+                                    foreach (var subject in adminService.Subjects_GetAll())
+                                    {
+                                        Console.WriteLine($"Id: {subject.Id}\tName: {subject.Name}");
+                                    }
+                                    
+                                    Console.WriteLine("Please enter 0 to stop)\"" +
+                                                      "Please input only correct id");
+                                    Console.WriteLine();
+                                    while (true)
+                                    {
+                                        var tmp = int.Parse(Console.ReadLine());
+                                        if (tmp== 0)
+                                        {
+                                            break;
+                                        }
+                                        subjects.Add(tmp);
+                                    }
                                     
                                     adminService.Student_Create(new StudentDto
                                     {
@@ -518,7 +547,7 @@ namespace School.UI
                                         FirstName = firstName,
                                         LastName = LastName,
                                         Gender = gender,
-                                        SubjectIds = new List<int>()
+                                        SubjectIds = subjects
                                     });
                                     Console.WriteLine("Student was created");
                                     break;
@@ -538,7 +567,7 @@ namespace School.UI
 
                         } while (choiceCrud != "0");
                         break;
-                    //problem in create and edit with "Students", "Teachers"
+                    //problem in create with "Students", "Teachers"
                     case "2":
                         Console.Clear();
                         do
@@ -628,10 +657,69 @@ namespace School.UI
                                                 Console.WriteLine("Name was edit)\n");
                                                 break;
                                             case "2":
-                                                Console.WriteLine("Sorry, but now you can't edit this property (;");
+                                                Console.WriteLine("\nStudents:\n");
+                                                foreach (var studentDto in adminService.Students_GetAll())
+                                                {
+                                                    Console.WriteLine($"Id: {studentDto.Id}\t\tFull name: {studentDto.FullName}");
+                                                    
+                                                }
+                                                                
+                                                Console.WriteLine();
+                                                var sIds = new List<int>();
+                                                Console.WriteLine("Enter student ids to add subject, pls input only correct value\n");
+                                                        
+                                                while (true)
+                                                {
+                                                    int sId;
+                                                    try
+                                                    {
+                                                        sId = int.Parse(Console.ReadLine());
+                                                    }
+                                                    catch (Exception e)
+                                                    {
+                                                        continue;
+                                                    }
+                                                    if (sId == 0)
+                                                    {
+                                                        break;
+                                                    }
+                                                    sIds.Add(sId);
+                                                }
+                                                
+                                                adminService.Subjects_Edit_Students(idSubject, sIds);
+                                                
                                                 break;
                                             case "3":
-                                                Console.WriteLine("Sorry, but now you can't edit this property (;");
+                                                Console.WriteLine("\nTeachers:\n");
+                                                foreach (var teacherDto in adminService.Teachers_GetAll())
+                                                {
+                                                    Console.WriteLine($"Id: {teacherDto.Id}\t\tFull name: {teacherDto.FullName}");
+                                                    
+                                                }
+                                                                
+                                                Console.WriteLine();
+                                                var tIds = new List<int>();
+                                                Console.WriteLine("Enter teachers ids to add subject, pls input only correct value\n");
+                                                        
+                                                while (true)
+                                                {
+                                                    int tId;
+                                                    try
+                                                    {
+                                                        tId = int.Parse(Console.ReadLine());
+                                                    }
+                                                    catch (Exception e)
+                                                    {
+                                                        continue;
+                                                    }
+                                                    if (tId == 0)
+                                                    {
+                                                        break;
+                                                    }
+                                                    tIds.Add(tId);
+                                                }
+                                                
+                                                adminService.Subjects_Edit_Teachers(idSubject, tIds);
                                                 break;
                                         }
                                         
@@ -646,9 +734,70 @@ namespace School.UI
                                     Console.WriteLine("Enter name: ");
                                     name = Console.ReadLine();
                                     
+                                    Console.WriteLine("\nStudents:\n");
+                                    foreach (var studentDto in adminService.Students_GetAll())
+                                    {
+                                        Console.WriteLine($"Id: {studentDto.Id}\t\tFull name: {studentDto.FullName}");
+                                                    
+                                    }
+                                                                
+                                    Console.WriteLine();
+                                    var studIds = new List<int>();
+                                    Console.WriteLine("Enter student ids to add subject, pls input only correct value\n");
+                                                        
+                                    while (true)
+                                    {
+                                        int sId;
+                                        try
+                                        {
+                                            sId = int.Parse(Console.ReadLine());
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            continue;
+                                        }
+                                        if (sId == 0)
+                                        {
+                                            break;
+                                        }
+                                        studIds.Add(sId);
+                                    }
+                                    
+                                    Console.WriteLine("\nTeachers:\n");
+                                    foreach (var teacherDto in adminService.Teachers_GetAll())
+                                    {
+                                        Console.WriteLine($"Id: {teacherDto.Id}\t\tFull name: {teacherDto.FullName}");
+                                                    
+                                    }
+                                                                
+                                    Console.WriteLine();
+                                    var teachIds = new List<int>();
+                                    Console.WriteLine("Enter teachers ids to add subject, pls input only correct value\n");
+                                                        
+                                    while (true)
+                                    {
+                                        int tId;
+                                        try
+                                        {
+                                            tId = int.Parse(Console.ReadLine());
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            continue;
+                                        }
+                                        if (tId == 0)
+                                        {
+                                            break;
+                                        }
+                                        teachIds.Add(tId);
+                                    }
+                                    
+                                    
                                     adminService.Subject_Create(new SubjectDto
                                     {
-                                        Name = name
+                                        Name = name,
+                                        TeacherIds = teachIds,
+                                        StudentIds = studIds
                                     });
 
                                     Console.WriteLine("New subject was created");
@@ -671,7 +820,7 @@ namespace School.UI
 
                         } while (choiceCrud != "0");
                         break;
-                    //problem in create and edit with "Subjects"
+                    //all work
                     case "3":
                         Console.Clear();
                         do
@@ -851,6 +1000,8 @@ namespace School.UI
                                                 } while (true);
                                                 
                                                 adminService.Teachers_Edit_Subjects(id_Edit, subjectIds);
+
+                                                Console.WriteLine("Subjects was edit");
                                                 
                                                 break;
                                         }
@@ -909,6 +1060,31 @@ namespace School.UI
                                     {
                                         classID = null;
                                     }
+
+                                    Console.WriteLine("\nSubjects:\n");
+
+                                    foreach (var subject in adminService.Subjects_GetAll())
+                                    {
+                                        Console.WriteLine($"Id: {subject.Id}\t\tName: {subject.Name}");
+                                    }
+
+                                    Console.WriteLine();
+                                    
+                                    var subIds = new List<int>();
+                                                
+                                    Console.WriteLine();
+
+                                                
+                                    do
+                                    {
+                                        var subId = int.Parse(Console.ReadLine());
+                                        if (subId == 0)
+                                        {
+                                            break;
+                                        }
+                                        subIds.Add(subId);
+                                                    
+                                    } while (true);
                                     
                                     adminService.Teacher_Create(new TeacherDto
                                     {
@@ -916,7 +1092,8 @@ namespace School.UI
                                         LastName = lastName,
                                         Age = age,
                                         ClassId = classID,
-                                        Gender = gender
+                                        Gender = gender,
+                                        SubjectIds = subIds
                                     });
 
                                     Console.WriteLine("Teacher was added\n");
@@ -1179,11 +1356,10 @@ namespace School.UI
                 }
             } while (choiceMain!="0");
         }
-        
-        static void VisitorInterface()
+        static void VisitorInterface(MainService main)
         {
             Console.Clear();
-            var visitorService = new VisitorService();
+            var visitorService = new VisitorService(main.GetDb());
             string choice_1;
             do
             {

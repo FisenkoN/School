@@ -2,6 +2,7 @@
 using System.Linq;
 using School.BLL.Dto;
 using School.BLL.Mapper;
+using School.DAL;
 using School.DAL.Entities;
 using School.DAL.Repository;
 using Gender = School.Models.Gender;
@@ -18,12 +19,15 @@ namespace School.BLL.Services
 
         private ClassRepository _classRepository;
 
-        public StudentService()
+        private Map Map;
+
+        public StudentService(SchoolDbContext db)
         {
-            _studentRepository = new StudentRepository();
-            _teacherRepository = new TeacherRepository();
-            _subjectRepository = new SubjectRepository();
-            _classRepository = new ClassRepository();
+            Map = new Map(db);
+            _studentRepository = new StudentRepository(db);
+            _teacherRepository = new TeacherRepository(db);
+            _subjectRepository = new SubjectRepository(db);
+            _classRepository = new ClassRepository(db);
         }
 
         public TeacherDto GetTeacherForId(int? id)
@@ -123,26 +127,29 @@ namespace School.BLL.Services
             _studentRepository.Update(s);
         }
 
-        public void Edit_Subjects(int? id, int?[] subjectIds)
+        public void Edit_Subjects(int? id, List<int> subjectIds)
         {
             var s = _studentRepository.GetOneRelated(id);
             
             s.Subjects.Clear();
 
-            for (int i = 0; i < subjectIds.Length; i++)
-            {
-                s.Subjects.Add(_subjectRepository.GetOne(subjectIds[i]));
-            }
-            
             _studentRepository.Update(s);
 
+            s = _studentRepository.GetOneRelated(id);
+
+            foreach (var subjectId in subjectIds)
+            {
+                s.Subjects.Add(_subjectRepository.GetOne(subjectId));
+            }
+
+            _studentRepository.Update(s);
         }
         
 
         public List<string> GetClasses() =>
             _classRepository.GetAll().Select(c => c.Name).ToList();
 
-        public List<string> GetSubjects() =>
-            _subjectRepository.GetAll().Select(s => s.Name).ToList();
+        public IEnumerable<SubjectDto> GetSubjects() =>
+            from s in _subjectRepository.GetAll() select Map.To(s);
     }
 }

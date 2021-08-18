@@ -2,6 +2,7 @@
 using System.Linq;
 using School.BLL.Dto;
 using School.BLL.Mapper;
+using School.DAL;
 using School.DAL.Entities;
 using School.DAL.Repository;
 
@@ -13,13 +14,16 @@ namespace School.BLL.Services
         private StudentRepository _studentRepository;
         private SubjectRepository _subjectRepository;
         private ClassRepository _classRepository;
+
+        private Map Map;
         
-        public AdminService()
+        public AdminService(SchoolDbContext schoolDbContext)
         {
-            _studentRepository = new StudentRepository();
-            _subjectRepository = new SubjectRepository();
-            _classRepository = new ClassRepository();
-            _teacherRepository = new TeacherRepository();
+            Map = new Map(schoolDbContext);
+            _studentRepository = new StudentRepository(schoolDbContext);
+            _subjectRepository = new SubjectRepository(schoolDbContext);
+            _classRepository = new ClassRepository(schoolDbContext);
+            _teacherRepository = new TeacherRepository(schoolDbContext);
         }
 
         public IEnumerable<StudentDto> Students_GetAll() =>
@@ -252,12 +256,66 @@ namespace School.BLL.Services
             
             teacher = _teacherRepository.GetOneRelated(id);
 
-            for (int i = 0; i < subjects.Count; i++)
+            foreach (var t in subjects)
             {
-                teacher.Subjects.Add(_subjectRepository.GetOne(subjects[i]));
+                teacher.Subjects.Add(_subjectRepository.GetOne(t));
             }
 
             _teacherRepository.Update(teacher);
+        }
+
+        public void Students_Edit_Subjects(int? id, List<int> subjects)
+        {
+            var student = _studentRepository.GetOneRelated(id);
+            
+            student.Subjects.Clear();
+
+            _studentRepository.Update(student);
+
+            student = _studentRepository.GetOneRelated(id);
+
+            foreach (var t in subjects)
+            {
+                student.Subjects.Add(_subjectRepository.GetOne(t));
+            }
+
+            _studentRepository.Update(student);
+        }
+
+        public void Subjects_Edit_Students(int? id, List<int> students)
+        {
+            var subject = _subjectRepository.GetOne(id);
+            
+            subject.Students.Clear();
+
+            _subjectRepository.Update(subject);
+
+            subject = _subjectRepository.GetOne(id);
+
+            foreach (var i in students)
+            {
+                subject.Students.Add(_studentRepository.GetOne(i));
+            }
+
+            _subjectRepository.Update(subject);
+        }
+
+        public void Subjects_Edit_Teachers(int? id, List<int> teachers)
+        {
+            var subject = _subjectRepository.GetOne(id);
+            
+            subject.Students.Clear();
+
+            _subjectRepository.Update(subject);
+            
+            subject = _subjectRepository.GetOne(id);
+            
+            foreach (var i in teachers)
+            {
+                subject.Teachers.Add(_teacherRepository.GetOne(i));
+            }
+
+            _subjectRepository.Update(subject);
         }
     }
 }

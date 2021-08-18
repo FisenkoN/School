@@ -3,14 +3,18 @@ using School.DAL.DataInitialization;
 
 namespace School.BLL.Services
 {
-    public static class MainService
+    public class MainService
     {
-        public static void Start()
+        private SchoolDbContext context;
+
+        public MainService()
         {
-            var context = new SchoolDbContext();
+            context = new SchoolDbContext();
             
             MyDataInitializer.RecreateDatabase(context);
             MyDataInitializer.InitializeData(context);
-        }   
+        }
+
+        public SchoolDbContext GetDb() => context;
     }
 }

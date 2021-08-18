@@ -7,12 +7,12 @@ using School.BLL.Services;
 
 namespace School.UI
 {
-    public static class Ui
+    public class Ui
     {
         private static StudentService _studentService;
-        static Ui()
+        public Ui(MainService main)
         {
-            _studentService = new StudentService();
+            _studentService = new StudentService(main.GetDb());
             
         }
 
@@ -21,7 +21,7 @@ namespace School.UI
             
             if (id!= null)
             {   
-                _studentService.DeleteStudent(_studentService.GetStudentForId(id));  
+                  
             }
         }
         

@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Linq;
 using School.BLL.Dto;
+using School.DAL;
 using School.DAL.Entities;
 using School.DAL.Repository;
 
 namespace School.BLL.Mapper
 {
-    public static class Map
+    public class Map
     {
         private static StudentRepository _studentRepository;
         private static TeacherRepository _teacherRepository;
-        //private static ClassRepository ClassRepository;
+       // private static ClassRepository ClassRepository;
         private static SubjectRepository _subjectRepository;
         
-        static Map()
-        {
-            _studentRepository = new StudentRepository();
-            _teacherRepository = new TeacherRepository();
-            //ClassRepository = new ClassRepository();
-            _subjectRepository = new SubjectRepository();
+        public Map(SchoolDbContext dbContext)   
+        {   
+            _studentRepository = new StudentRepository(dbContext);
+            _teacherRepository = new TeacherRepository(dbContext);
+           // ClassRepository = new ClassRepository();
+            _subjectRepository = new SubjectRepository(dbContext);
             
         }
         

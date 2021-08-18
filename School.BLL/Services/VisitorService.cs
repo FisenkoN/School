@@ -2,6 +2,7 @@
 using System.Linq;
 using School.BLL.Dto;
 using School.BLL.Mapper;
+using School.DAL;
 using School.DAL.Repository;
 
 namespace School.BLL.Services
@@ -14,11 +15,11 @@ namespace School.BLL.Services
         
         private SubjectRepository _subjectRepository;
 
-        public VisitorService()
+        public VisitorService(SchoolDbContext db)
         {
-            _teacherRepository = new TeacherRepository();
-            _classRepository = new ClassRepository();
-            _subjectRepository = new SubjectRepository();
+            _teacherRepository = new TeacherRepository(db);
+            _classRepository = new ClassRepository(db);
+            _subjectRepository = new SubjectRepository(db);
         }
 
         public IEnumerable<ClassDto> GetClasses() =>

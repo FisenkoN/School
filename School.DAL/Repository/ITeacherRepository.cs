@@ -2,8 +2,5 @@
 
 namespace School.DAL.Repository
 {
-    public interface ITeacherRepository:IRepository<Teacher>
-    {
-        
-    }
+    public interface ITeacherRepository:IRepository<Teacher> { }
 }

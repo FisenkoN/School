@@ -11,6 +11,8 @@ namespace School.DAL.Repository
 {
     public class StudentRepository:BaseRepository<Student>, IStudentRepository, IRelated<Student,Class>
     {
+        public StudentRepository(SchoolDbContext db):base(db) {}
+        
         public List<Student> GetOtherStudents() =>
             GetRelatedData().
                 Where(s => s.Gender == Gender.Other).
@@ -23,15 +25,12 @@ namespace School.DAL.Repository
                 Select(s => s).
                 ToList();
         
-        public override Student GetOne(int? id) =>
-             GetAll().FirstOrDefault(s => s.Id == id);
-        
         public IIncludableQueryable<Student,Class> GetRelatedData() => 
             DbContext.Students.Include(s => s.Subjects)
                 .Include(s => s.Class);
 
         public Student GetOneRelated(int? id) =>
-            GetRelatedData().FirstOrDefault(s => s.Id == id);
+            GetRelatedData().ToList().Find(s => s.Id == id);
 
 
         public override IQueryable<Student> GetSome(Expression<Func<Student, bool>> @where) =>

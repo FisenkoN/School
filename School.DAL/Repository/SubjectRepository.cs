@@ -11,6 +11,8 @@ namespace School.DAL.Repository
 {
     public class SubjectRepository : BaseRepository<Subject>, ISubjectRepository, IRelated<Subject,ICollection<Teacher>>
     {
+
+        public SubjectRepository(SchoolDbContext db):base(db) { }
         public override List<Subject> GetAll<TSortField>(Expression<Func<Subject, TSortField>> orderBy, bool @ascending) =>
             (@ascending ? GetRelatedData().OrderBy(orderBy) :
                 GetRelatedData().OrderByDescending(orderBy)).ToList();
@@ -21,17 +23,13 @@ namespace School.DAL.Repository
                  Select(s => s).
                  ToList();
 
-        // public override Subject GetOne(int? id) =>
-        //     GetAll().
-        //         First(s => s.Id == id);
-
         public IIncludableQueryable<Subject, ICollection<Teacher>> GetRelatedData() => 
             DbContext.Subjects.Include(s => s.Students)
                 .Include(s => s.Teachers);
 
         public Subject GetOneRelated(int? id) =>
             GetRelatedData().
-                First(s => s.Id == id);
+                ToList().Find(s => s.Id == id);
 
 
         public override IQueryable<Subject> GetSome(Expression<Func<Subject, bool>> @where) =>
